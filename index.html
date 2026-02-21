@@ -19,7 +19,7 @@
             color: #ffffff;
             font-family: 'Inter', sans-serif;
             overflow-x: hidden;
-            padding-bottom: 90px; 
+            padding-bottom: 100px; 
         }
         @media (min-width: 768px) {
             body { padding-bottom: 0; }
@@ -49,6 +49,8 @@
             color: var(--red);
             text-shadow: 0 0 10px rgba(255, 0, 0, 0.3);
         }
+
+        /* Botão com Pulsação Suave */
         .neon-btn {
             background: var(--whatsapp);
             color: white;
@@ -60,11 +62,20 @@
             justify-content: center;
             text-align: center;
             z-index: 10;
+            animation: btn-pulse 2s infinite;
         }
+        @keyframes btn-pulse {
+            0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); transform: scale(1); }
+            70% { box-shadow: 0 0 0 15px rgba(37, 211, 102, 0); transform: scale(1.02); }
+            100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); transform: scale(1); }
+        }
+
         .neon-btn:hover {
             transform: scale(1.05) translateY(-3px);
             box-shadow: 0 0 40px rgba(37, 211, 102, 0.6);
+            animation: none;
         }
+
         .scanner::after {
             content: "";
             position: absolute;
@@ -134,59 +145,59 @@
             border: 0;
         }
 
-        /* --- CARROSSEL AUTOMÁTICO INFINITO COM TRAVAS --- */
+        /* --- CARROSSEL AUTOMÁTICO NITIDEZ MÁXIMA --- */
         .carousel-wrapper {
             width: 100%;
             overflow: hidden;
             position: relative;
             padding: 40px 0;
-            cursor: grab;
+            cursor: pointer;
             user-select: none;
             -webkit-user-select: none;
-            -webkit-touch-callout: none; /* Trava menu de salvar imagem no iOS */
+            touch-action: pan-y;
         }
         
         .carousel-track {
             display: flex;
-            width: calc(240px * 40); 
-            animation: scroll 150s linear infinite; /* Bem mais devagar */
+            width: max-content; 
+            animation: scroll 180s linear infinite; /* Velocidade ideal para leitura */
             gap: 1.5rem;
-            pointer-events: auto;
         }
         
-        /* Pausa ao segurar */
         .carousel-wrapper:active .carousel-track {
             animation-play-state: paused;
         }
 
         .print-card {
-            width: 240px;
+            width: 280px; /* Aumentado para melhor leitura */
+            aspect-ratio: 9/16;
             flex-shrink: 0;
             border-radius: 1rem;
             overflow: hidden;
-            border: 1px solid rgba(255,255,255,0.1);
-            background: #111;
-            pointer-events: none; /* Evita que o clique na imagem abra menus */
+            border: 2px solid rgba(255,255,255,0.05);
+            background: #000;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
         
         .print-card img {
             width: 100%;
-            height: auto;
+            height: 100%;
+            object-fit: cover;
             pointer-events: none;
             -webkit-user-drag: none;
+            image-rendering: -webkit-optimize-contrast; /* Melhora nitidez */
         }
 
         @keyframes scroll {
             0% { transform: translateX(0); }
-            100% { transform: translateX(calc(-240px * 20 - 1.5rem * 20)); }
+            100% { transform: translateX(calc(-280px * 20 - 1.5rem * 20)); }
         }
 
-        /* FAQ Styling */
         details summary::-webkit-details-marker { display: none; }
         details[open] summary span { transform: rotate(180deg); }
     </style>
 </head>
-<body oncontextmenu="return false;"> <!-- Bloqueia clique direito na página toda para evitar 'salvar como' -->
+<body oncontextmenu="return false;">
 
     <canvas id="bg-canvas"></canvas>
 
@@ -223,8 +234,7 @@
 
             <!-- BOTÃO COM DELAY -->
             <div id="cta-node" class="hidden-node">
-                <!-- Botão ajustado: py-4 no mobile -->
-                <a href="https://pay.hotmart.com/Y101106544Q?checkoutMode=10" target="_blank" rel="noopener noreferrer" class="neon-btn w-full md:w-auto px-12 py-4 md:py-7 rounded-full text-lg md:text-2xl uppercase tracking-tighter">
+                <a href="https://pay.hotmart.com/Y101106544Q?checkoutMode=10" target="_blank" rel="noopener noreferrer" class="neon-btn w-full md:w-auto px-12 py-4 md:py-7 rounded-full text-lg md:text-2xl uppercase tracking-tighter shadow-green-500/20">
                     QUERO COMEÇAR MINHA FÁBRICA AGORA!
                 </a>
                 <p class="mt-4 text-[10px] text-gray-500">🔒 Compra 100% Segura. Acesso Imediato.</p>
@@ -262,11 +272,11 @@
             </div>
         </section>
 
-        <!-- LÂMINA: CARROSSEL AUTOMÁTICO (MAIS LENTO + TRAVA DE SALVAR) -->
+        <!-- LÂMINA: CARROSSEL AUTOMÁTICO (CORES E NITIDEZ) -->
         <section class="py-24 bg-zinc-900/40 border-y border-white/5 relative overflow-hidden">
             <div class="max-w-7xl mx-auto px-6 mb-12 text-center">
                 <h2 class="text-2xl md:text-5xl font-black neon-text mb-4">RECONHECIMENTO MÁXIMO</h2>
-                <p class="text-gray-400 uppercase tracking-widest text-[10px] md:text-sm italic">Pressione e segure para pausar a leitura</p>
+                <p class="text-gray-400 uppercase tracking-widest text-[10px] md:text-sm italic">Clique e segure para pausar a leitura</p>
             </div>
             
             <div class="carousel-wrapper">
@@ -280,49 +290,48 @@
             <div class="text-center mb-16">
                 <h2 class="text-xl md:text-4xl mb-4 font-bold">> O QUE VOCÊ VAI APRENDER A FAZER NESSE CURSO:</h2>
                 <p class="text-gray-400 max-w-3xl mx-auto text-sm md:text-lg">
-                    Domine a nova era do criador fantasma. A inteligência artificial pesquisa, roteiriza e narra. Você apenas junta as peças e cria vídeos altamente virais nos formatos mais lucrativos da internet.
+                    Domine a nova era do criador fantasma. A inteligência artificial pesquisa, roteiriza e narra. Você apenas junta as peças e cria vídeos altamente virais.
                 </p>
             </div>
             
             <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-                <div class="relative group overflow-hidden rounded-2xl">
-                    <img id="img-anime" src="" alt="Estilo Anime" class="w-full grayscale group-hover:grayscale-0 transition-all duration-500 object-cover aspect-[9/16]">
+                <div class="relative group overflow-hidden rounded-2xl border border-white/5">
+                    <img id="img-anime" src="" alt="Estilo Anime" class="w-full transition-transform duration-500 group-hover:scale-110 object-cover aspect-[9/16]">
                     <div class="absolute bottom-0 left-0 p-4 bg-black/80 w-full text-center text-[10px] font-bold">ANIME SINTÉTICO</div>
                 </div>
-                <div class="relative group overflow-hidden rounded-2xl">
-                    <img id="img-herois" src="" alt="Estilo Heróis" class="w-full grayscale group-hover:grayscale-0 transition-all duration-500 object-cover aspect-[9/16]">
+                <div class="relative group overflow-hidden rounded-2xl border border-white/5">
+                    <img id="img-herois" src="" alt="Estilo Heróis" class="w-full transition-transform duration-500 group-hover:scale-110 object-cover aspect-[9/16]">
                     <div class="absolute bottom-0 left-0 p-4 bg-black/80 w-full text-center text-[10px] font-bold">BASTIDORES IDOL</div>
                 </div>
-                <div class="relative group overflow-hidden rounded-2xl">
-                    <img id="img-terror" src="" alt="Estilo Terror" class="w-full grayscale group-hover:grayscale-0 transition-all duration-500 object-cover aspect-[9/16]">
+                <div class="relative group overflow-hidden rounded-2xl border border-white/5">
+                    <img id="img-terror" src="" alt="Estilo Terror" class="w-full transition-transform duration-500 group-hover:scale-110 object-cover aspect-[9/16]">
                     <div class="absolute bottom-0 left-0 p-4 bg-black/80 w-full text-center text-[10px] font-bold">BASTIDORES TERROR</div>
                 </div>
-                <div class="relative group overflow-hidden rounded-2xl">
-                    <img id="img-podcast" src="" alt="Estilo Podcast" class="w-full grayscale group-hover:grayscale-0 transition-all duration-500 object-cover aspect-[9/16]">
+                <div class="relative group overflow-hidden rounded-2xl border border-white/5">
+                    <img id="img-podcast" src="" alt="Estilo Podcast" class="w-full transition-transform duration-500 group-hover:scale-110 object-cover aspect-[9/16]">
                     <div class="absolute bottom-0 left-0 p-4 bg-black/80 w-full text-center text-[10px] font-bold">PODCAST FICTÍCIO</div>
                 </div>
             </div>
         </section>
 
-        <!-- DOBRA 4: AUTORIDADE -->
+        <!-- DOBRA 4: AUTORIDADE (IMAGEM COM CORES) -->
         <section class="py-24 px-6 authority-bg">
             <div class="max-w-6xl mx-auto flex flex-col md:flex-row items-center gap-12">
                 <div class="w-full md:w-1/2 relative">
                     <div class="absolute inset-0 bg-green-500/20 blur-[80px] rounded-full"></div>
-                    <img id="img-anderson" src="" alt="Anderson Rêgo" class="relative z-10 rounded-3xl border border-white/10 grayscale hover:grayscale-0 transition-all duration-700 shadow-2xl w-full">
+                    <img id="img-anderson" src="" alt="Anderson Rêgo" class="relative z-10 rounded-3xl border border-white/10 shadow-2xl w-full">
                 </div>
                 <div class="w-full md:w-1/2">
                     <h2 class="text-2xl md:text-5xl mb-6 font-bold">AFINAL, QUEM É ANDERSON RÊGO?</h2>
                     <div class="space-y-6 text-gray-300 leading-relaxed text-sm md:text-lg">
                         <p>Produtor de conteúdo e especialista em automação digital. Anderson é a mente por trás de canais que faturam em dólar todos os meses de forma totalmente invisível.</p>
                         <p>Após conquistar a cobiçada placa de prata do YouTube (100 mil inscritos) atuando apenas nos bastidores, ele decidiu abrir a caixa preta da sua operação.</p>
-                        <p>Aqui, você não vai aprender a ser apenas um editor de vídeos comum. Você será treinado para se tornar o dono de uma verdadeira fábrica de conteúdo sintético.</p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- LÂMINA: DEPOIMENTO EM VÍDEO (YOUTUBE LOOP) -->
+        <!-- LÂMINA: DEPOIMENTO EM VÍDEO -->
         <section class="py-24 px-6 bg-black">
             <div class="max-w-4xl mx-auto">
                 <div class="text-center mb-12">
@@ -343,36 +352,44 @@
                 <div class="grid md:grid-cols-3 gap-8">
                     <div class="glass-panel p-8 rounded-3xl border border-red-500/20">
                         <h3 class="text-xl font-bold red-text mb-4">MÓDULO 0: O SETUP DO IMPÉRIO</h3>
-                        <p class="text-sm text-gray-300 leading-relaxed">A base de tudo. Como configurar seu canal do zero para o sucesso e criar a identidade visual magnética do seu herói.</p>
+                        <p class="text-sm text-gray-300 leading-relaxed">A base de tudo. Como configurar seu canal do zero para o sucesso.</p>
                     </div>
                     <div class="glass-panel p-8 rounded-3xl border border-red-500/20">
                         <h3 class="text-xl font-bold red-text mb-4">MÓDULO 1: A ESTRATÉGIA INVENCÍVEL</h3>
-                        <p class="text-sm text-gray-300 leading-relaxed">O atalho emocional. Aprenda a fórmula exata das histórias que retêm a atenção no Shorts.</p>
+                        <p class="text-sm text-gray-300 leading-relaxed">O atalho emocional. Aprenda a fórmula exata das histórias que retêm a atenção.</p>
                     </div>
                     <div class="glass-panel p-8 rounded-3xl border border-red-500/20">
                         <h3 class="text-xl font-bold red-text mb-4">MÓDULO 2: A FÁBRICA NA PRÁTICA</h3>
-                        <p class="text-sm text-gray-300 leading-relaxed">Onde a mágica acontece. Geração de roteiros virais, prompts otimizados e narração.</p>
+                        <p class="text-sm text-gray-300 leading-relaxed">Onde a mágica acontece. Geração de roteiros virais e montagem letal.</p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- DOBRA 6: BÔNUS -->
+        <!-- DOBRA 6: BÔNUS (VALORES TAXADOS) -->
         <section class="py-24 px-6">
             <div class="max-w-6xl mx-auto">
-                <h2 class="text-xl md:text-4xl text-center mb-16 font-bold">> E PARA OS PRIMEIROS 100 QUE GARANTIREM A VAGA HOJE... SEPAREI 2 BÔNUS VIP INÉDITOS:</h2>
+                <h2 class="text-xl md:text-4xl text-center mb-16 font-bold">> E PARA OS PRIMEIROS 100... SEPAREI 2 BÔNUS VIP:</h2>
                 <div class="grid md:grid-cols-2 gap-8">
-                    <div class="bonus-box p-8 rounded-[2rem] relative overflow-hidden">
-                        <div class="absolute top-0 right-0 bg-red-600 px-4 py-1 text-[10px] font-bold">100% GRÁTIS</div>
+                    <!-- BÔNUS 1 -->
+                    <div class="bonus-box p-8 rounded-[2rem] relative overflow-hidden flex flex-col">
+                        <div class="absolute top-0 right-0 bg-red-600 px-4 py-1 text-[10px] font-bold">VALOR: R$ 197,00</div>
                         <h3 class="text-xl font-bold mb-4 uppercase text-sm md:text-xl">🎁 BÔNUS VIP 1: A MÁQUINA DE PODCASTS COM I.A.</h3>
-                        <p class="text-sm text-gray-300 mb-6 leading-relaxed">O atalho definitivo para bater as 4.000 horas do YouTube rápido.</p>
-                        <p class="text-green-500 font-bold">HOJE: TOTALMENTE GRÁTIS</p>
+                        <p class="text-sm text-gray-300 mb-6 leading-relaxed flex-grow">O atalho definitivo para bater as 4.000 horas do YouTube rápido com podcasts fictícios.</p>
+                        <div class="flex items-center gap-3">
+                            <span class="text-gray-500 line-through text-xs font-bold italic">DE R$ 197,00</span>
+                            <span class="text-green-500 font-black text-lg animate-pulse">POR: R$ 0,00</span>
+                        </div>
                     </div>
-                    <div class="bonus-box p-8 rounded-[2rem] relative overflow-hidden">
-                        <div class="absolute top-0 right-0 bg-red-600 px-4 py-1 text-[10px] font-bold">100% GRÁTIS</div>
+                    <!-- BÔNUS 2 -->
+                    <div class="bonus-box p-8 rounded-[2rem] relative overflow-hidden flex flex-col">
+                        <div class="absolute top-0 right-0 bg-red-600 px-4 py-1 text-[10px] font-bold">VALOR: R$ 147,00</div>
                         <h3 class="text-xl font-bold mb-4 uppercase text-sm md:text-xl">📸 BÔNUS VIP 2: MÉTODO DE BASTIDORES VIRAIS</h3>
-                        <p class="text-sm text-gray-300 mb-6 leading-relaxed">O nicho de fãs e terror é explosivo. Entregamos os prompts técnicos exatos.</p>
-                        <p class="text-green-500 font-bold">HOJE: TOTALMENTE GRÁTIS</p>
+                        <p class="text-sm text-gray-300 mb-6 leading-relaxed flex-grow">Entregamos os prompts técnicos para gerar cenários hiper-realistas de terror e ídolos.</p>
+                        <div class="flex items-center gap-3">
+                            <span class="text-gray-500 line-through text-xs font-bold italic">DE R$ 147,00</span>
+                            <span class="text-green-500 font-black text-lg animate-pulse">POR: R$ 0,00</span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -383,62 +400,56 @@
             <div class="max-w-5xl mx-auto flex flex-col md:flex-row glass-panel rounded-[3rem] overflow-hidden border-2 border-red-600/20">
                 <div class="w-full md:w-1/2 p-12 bg-red-900/5 flex flex-col justify-center text-left">
                     <h2 class="text-xl md:text-2xl font-bold mb-6 font-heading">> ESSA É A ÚNICA OPORTUNIDADE QUE PODE MUDAR A SUA REALIDADE FINANCEIRA.</h2>
-                    <p class="text-gray-400 text-sm md:text-base">Acesso imediato ao ecossistema Shorts Milionários e aos bônus secretos.</p>
+                    <p class="text-gray-400 text-sm md:text-base">Acesso imediato ao arsenal completo Shorts Milionários.</p>
                 </div>
                 <div class="w-full md:w-1/2 p-12 bg-black flex flex-col justify-center items-center">
-                    <p class="text-gray-500 line-through mb-2 text-lg md:text-xl">VALOR REAL: R$ 391,00</p>
+                    <p class="text-gray-500 line-through mb-2 text-lg md:text-xl">VALOR TOTAL: R$ 391,00</p>
                     <h3 class="text-5xl md:text-8xl font-black neon-text mb-4">R$ 47</h3>
-                    <p class="text-gray-500 text-[10px] md:text-xs mb-8 uppercase tracking-widest">(Ou parcele em até 5x no cartão)</p>
-                    <a href="https://pay.hotmart.com/Y101106544Q?checkoutMode=10" target="_blank" rel="noopener noreferrer" class="neon-btn w-full py-8 rounded-3xl text-lg md:text-xl uppercase shadow-2xl">
-                        SIM! QUERO GARANTIR MEU CURSO
+                    <p class="text-gray-500 text-[10px] md:text-xs mb-8 uppercase tracking-widest">(Ou em até 5x no cartão)</p>
+                    <a href="https://pay.hotmart.com/Y101106544Q?checkoutMode=10" target="_blank" rel="noopener noreferrer" class="neon-btn w-full py-4 md:py-8 rounded-3xl text-lg md:text-xl uppercase shadow-2xl">
+                        QUERO GARANTIR MINHA VAGA
                     </a>
                 </div>
             </div>
         </section>
 
-        <!-- DOBRA 8: FAQ & QUEBRA DE OBJEÇÕES -->
+        <!-- DOBRA 8: FAQ -->
         <section class="py-24 px-6 bg-zinc-950">
             <div class="max-w-4xl mx-auto">
                 <div class="text-center mb-16">
-                    <img id="img-garantia" src="" alt="7 Dias de Garantia" class="w-24 md:w-32 mx-auto mb-8 grayscale hover:grayscale-0 transition-all">
-                    <h2 class="text-xl md:text-3xl font-bold mb-4 uppercase tracking-tighter">Perguntas Frequentes & Objeções</h2>
-                    <p class="text-gray-400 text-sm md:text-lg leading-relaxed max-w-2xl mx-auto">Tire todas as suas dúvidas antes de entrar para a elite da Fábrica Anônima.</p>
+                    <img id="img-garantia" src="" alt="7 Dias de Garantia" class="w-24 md:w-32 mx-auto mb-8 transition-all hover:scale-110">
+                    <h2 class="text-xl md:text-3xl font-bold mb-4 uppercase tracking-tighter">Perguntas Frequentes</h2>
+                    <p class="text-gray-400 text-sm md:text-lg max-w-2xl mx-auto">Dúvidas comuns respondidas.</p>
                 </div>
-                
                 <div class="space-y-4" id="faq-container">
                 </div>
             </div>
         </section>
 
-        <!-- RODAPÉ REFORÇADO -->
+        <!-- RODAPÉ -->
         <footer class="py-16 px-6 text-center bg-black border-t border-white/5">
             <div class="max-w-4xl mx-auto">
-                <p class="text-[10px] text-gray-600 uppercase tracking-widest mb-8">© 2026 Anderson Rêgo - Terreno Digital</p>
+                <p class="text-[10px] text-gray-600 uppercase tracking-widest mb-10">© 2026 Anderson Rêgo - Terreno Digital</p>
                 
                 <div class="flex flex-col md:flex-row justify-center items-center gap-6">
-                    <a href="https://politicadeprivacidademilionarios.netlify.app/" target="_blank" rel="noopener noreferrer" class="text-[10px] md:text-xs font-bold text-gray-400 hover:text-green-500 transition-colors uppercase border border-white/10 px-4 py-2 rounded-lg w-full md:w-auto">Política de Privacidade</a>
-                    <a href="https://termosecondocoesmilionarios.netlify.app/" target="_blank" rel="noopener noreferrer" class="text-[10px] md:text-xs font-bold text-gray-400 hover:text-green-500 transition-colors uppercase border border-white/10 px-4 py-2 rounded-lg w-full md:w-auto">Termos e Condições</a>
+                    <a href="https://politicadeprivacidademilionarios.netlify.app/" target="_blank" rel="noopener noreferrer" class="text-xs font-black text-white hover:text-green-500 transition-colors uppercase border-2 border-white/10 px-6 py-3 rounded-xl bg-white/5 w-full md:w-auto shadow-lg">Política de Privacidade</a>
+                    <a href="https://termosecondocoesmilionarios.netlify.app/" target="_blank" rel="noopener noreferrer" class="text-xs font-black text-white hover:text-green-500 transition-colors uppercase border-2 border-white/10 px-6 py-3 rounded-xl bg-white/5 w-full md:w-auto shadow-lg">Termos e Condições</a>
                 </div>
                 
-                <p class="mt-12 text-[8px] md:text-[9px] text-gray-800 opacity-60 leading-relaxed max-w-2xl mx-auto uppercase">Este site não faz parte do Google ou do Facebook. Além disso, este site NÃO é endossado pelo Google ou Facebook de nenhuma maneira.</p>
+                <p class="mt-12 text-[8px] md:text-[9px] text-gray-500 leading-relaxed max-w-2xl mx-auto uppercase">Este site não faz parte do Google ou do Facebook.</p>
             </div>
         </footer>
     </div>
 
-    <!-- STICKY MOBILE CTA -->
+    <!-- STICKY MOBILE CTA (REFINADO) -->
     <div id="sticky-cta" class="sticky-cta md:hidden">
-        <!-- Botão mobile ajustado: py-4 -->
-        <a href="https://pay.hotmart.com/Y101106544Q?checkoutMode=10" target="_blank" rel="noopener noreferrer" class="neon-btn w-full py-4 rounded-2xl text-lg uppercase shadow-2xl border-2 border-green-400/20">
-            GARANTIR MINHA VAGA: R$ 47
+        <a href="https://pay.hotmart.com/Y101106544Q?checkoutMode=10" target="_blank" rel="noopener noreferrer" class="neon-btn w-full py-4 rounded-2xl text-base uppercase shadow-2xl border border-green-400/30">
+            QUERO O CURSO: R$ 47
         </a>
     </div>
 
     <script>
-        // ==========================================
-        // CONFIGURAÇÕES DE LINKS E CONTEÚDO
-        // ==========================================
         const CONFIG_PAGINA = {
-            // IDs do YouTube: Se deixar vazio ou "ID_AQUI", a thumb permanece ativa.
             vslVideoId: "ID_AQUI", 
             depoimentoVideoId: "HgHQ6i9VhD0", 
 
@@ -458,15 +469,10 @@
             ],
 
             faq: [
-                { q: "Preciso de algum conhecimento prévio?", a: "Absolutamente não. O curso foca 100% na criação do conteúdo do zero. Nós vamos guiá-lo passo a passo." },
-                { q: "Posso ter problemas com direitos autorais?", a: "Risco zero. Esta é a maior vantagem do nosso método." },
-                { q: "Em quanto tempo consigo os 100.000 inscritos?", a: "Embora os resultados variem para cada pessoa, o método foi desenhado para acelerar sua jornada." },
-                { q: "Preciso de ferramentas ou softwares caros?", a: "Não. O método foi desenhado para ser o mais acessível possível." },
-                { q: "E se eu não gostar do curso?", a: "Seu risco é zero. Você tem uma garantia incondicional de 7 dias." },
-                { q: "Preciso saber editar vídeos profissionalmente?", a: "Não. O método usa a inteligência artificial do GEMINI para fazer o trabalho pesado." },
-                { q: "Funciona com qualquer grupo de K-pop ou Ator de Dorama?", a: "Sim. A técnica de 'Bastidores Realistas' é totalmente editável." },
-                { q: "Preciso de um computador super potente?", a: "Não. Todo o processamento é feito na nuvem." },
-                { q: "Como eu ganho dinheiro com esse módulo?", a: "Existem duas formas principais: vendendo 'SESSÕES DE FOTOS' digitais ou criando conteúdo viral para monetizar canais." }
+                { q: "Preciso de conhecimento prévio?", a: "Absolutamente não. Nós vamos guiá-lo passo a passo, clique a clique." },
+                { q: "Direitos autorais?", a: "Risco zero. Ensinamos você a criar TUDO do zero com IA." },
+                { q: "Tempo para resultados?", a: "Consistentemente, alunos alcançam grandes metas entre 30 a 90 dias." },
+                { q: "Ferramentas caras?", a: "Não. Ensinamos a usar ferramentas gratuitas ou de baixíssimo custo." }
             ]
         };
 
@@ -484,7 +490,7 @@
                 allPrints.forEach((link, index) => {
                     const div = document.createElement('div');
                     div.className = "print-card";
-                    div.innerHTML = `<img src="${link}" alt="Depoimento ${index + 1}" loading="lazy">`;
+                    div.innerHTML = `<img src="${link}" alt="Resultado Aluno ${index + 1}" loading="lazy">`;
                     carousel.appendChild(div);
                 });
             }
@@ -508,7 +514,6 @@
             }
         }
 
-        // --- BACKGROUND ANIMADO ---
         const scene = new THREE.Scene();
         const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
         const renderer = new THREE.WebGLRenderer({ canvas: document.getElementById('bg-canvas'), alpha: true });
@@ -533,7 +538,6 @@
                 const videoPlayerContainer = document.getElementById('vsl-player-container');
                 const depoVideoContainer = document.getElementById('depoimento-video-container');
                 
-                // Lógica VSL: Só injeta se o ID for válido
                 if (CONFIG_PAGINA.vslVideoId && CONFIG_PAGINA.vslVideoId !== "ID_AQUI") {
                     vslPlaceholder.style.display = 'none';
                     videoPlayerContainer.classList.add('active');
@@ -544,7 +548,6 @@
                         </div>`;
                 }
 
-                // Injeção DEPOIMENTO (Sempre injeta o depoimento)
                 if (CONFIG_PAGINA.depoimentoVideoId && CONFIG_PAGINA.depoimentoVideoId !== "ID_AQUI") {
                     const id = CONFIG_PAGINA.depoimentoVideoId;
                     depoVideoContainer.innerHTML = `
