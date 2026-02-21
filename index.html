@@ -19,7 +19,13 @@
             color: #ffffff;
             font-family: 'Inter', sans-serif;
             overflow-x: hidden;
+            /* Espaço para o botão fixo no mobile não tapar o conteúdo */
+            padding-bottom: 80px; 
         }
+        @media (min-width: 768px) {
+            body { padding-bottom: 0; }
+        }
+
         h1, h2, h3, .font-heading, .neon-btn {
             font-family: 'Montserrat', sans-serif;
             text-transform: uppercase;
@@ -111,10 +117,9 @@
             background: rgba(255, 0, 0, 0.05);
         }
         
-        /* Container responsivo para 16:9 */
         .video-container {
             position: relative;
-            padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+            padding-bottom: 56.25%; 
             height: 0;
             overflow: hidden;
             width: 100%;
@@ -130,12 +135,13 @@
             border: 0;
         }
 
-        /* --- CARROSSEL AUTOMÁTICO INFINITO --- */
+        /* --- CARROSSEL AUTOMÁTICO INFINITO COM PAUSA --- */
         .carousel-wrapper {
             width: 100%;
             overflow: hidden;
             position: relative;
             padding: 40px 0;
+            cursor: pointer;
         }
         
         .carousel-track {
@@ -145,6 +151,11 @@
             gap: 1.5rem;
         }
         
+        /* Pausa o carrossel ao clicar/segurar */
+        .carousel-wrapper:active .carousel-track {
+            animation-play-state: paused;
+        }
+
         .print-card {
             width: 240px;
             flex-shrink: 0;
@@ -188,11 +199,13 @@
                 ⚠️ A MAIOR TRANSFERÊNCIA DE RIQUEZA DIGITAL DA DÉCADA COMEÇOU...
             </div>
             
-            <h1 class="text-4xl md:text-7xl mb-8 leading-none font-black tracking-tighter">
+            <!-- Ajuste Mobile: text-2xl -->
+            <h1 class="text-2xl md:text-7xl mb-8 leading-tight md:leading-none font-black tracking-tighter">
                 A única linha de montagem validada para criar uma <span class="neon-text">fábrica de renda anônima</span> no YouTube... sem mostrar o rosto e sem usar a própria voz.
             </h1>
             
-            <p class="text-gray-400 text-lg md:text-xl mb-12 max-w-3xl mx-auto italic font-light leading-relaxed">
+            <!-- Ajuste Mobile: text-sm -->
+            <p class="text-gray-400 text-sm md:text-xl mb-12 max-w-3xl mx-auto italic font-light leading-relaxed">
                 Assista ao vídeo abaixo antes que ele saia do ar e descubra o protocolo de produção sintética trabalhando apenas 30 minutos por dia. <span class="text-white font-bold">(🔊 Ligue o som)</span>
             </p>
 
@@ -207,7 +220,8 @@
 
             <!-- BOTÃO COM DELAY -->
             <div id="cta-node" class="hidden-node">
-                <a href="https://pay.hotmart.com/Y101106544Q?checkoutMode=10" target="_blank" rel="noopener noreferrer" class="neon-btn w-full md:w-auto px-12 py-7 rounded-full text-xl md:text-2xl uppercase tracking-tighter">
+                <!-- Ajuste Mobile: text-lg -->
+                <a href="https://pay.hotmart.com/Y101106544Q?checkoutMode=10" target="_blank" rel="noopener noreferrer" class="neon-btn w-full md:w-auto px-12 py-7 rounded-full text-lg md:text-2xl uppercase tracking-tighter">
                     QUERO COMEÇAR MINHA FÁBRICA AGORA!
                 </a>
                 <p class="mt-4 text-[10px] text-gray-500">🔒 Compra 100% Segura. Acesso Imediato.</p>
@@ -221,7 +235,8 @@
         <!-- DOBRA 2: IDENTIFICAÇÃO -->
         <section class="py-24 px-6 bg-zinc-950/80">
             <div class="max-w-6xl mx-auto">
-                <h2 class="text-3xl md:text-4xl text-center mb-16 font-bold tracking-tight">> VOCÊ SE IDENTIFICA COM ALGUMA DESSAS SITUAÇÕES?</h2>
+                <!-- Ajuste Mobile: text-xl -->
+                <h2 class="text-xl md:text-4xl text-center mb-16 font-bold tracking-tight">> VOCÊ SE IDENTIFICA COM ALGUMA DESSAS SITUAÇÕES?</h2>
                 <div class="grid md:grid-cols-3 gap-8">
                     <div class="glass-panel p-8 rounded-3xl border-l-4 border-red-600">
                         <div class="text-3xl mb-4">⏰</div>
@@ -245,11 +260,12 @@
             </div>
         </section>
 
-        <!-- LÂMINA: CARROSSEL AUTOMÁTICO -->
+        <!-- LÂMINA: CARROSSEL AUTOMÁTICO (PAUSA AO CLICAR) -->
         <section class="py-24 bg-zinc-900/40 border-y border-white/5 relative overflow-hidden">
             <div class="max-w-7xl mx-auto px-6 mb-12 text-center">
-                <h2 class="text-3xl md:text-5xl font-black neon-text mb-4">RECONHECIMENTO MÁXIMO</h2>
-                <p class="text-gray-400 uppercase tracking-widest text-sm italic">O que os nossos alunos e seguidores estão a dizer</p>
+                <!-- Ajuste Mobile: text-2xl -->
+                <h2 class="text-2xl md:text-5xl font-black neon-text mb-4">RECONHECIMENTO MÁXIMO</h2>
+                <p class="text-gray-400 uppercase tracking-widest text-[10px] md:text-sm italic">Clique e segure para ler os depoimentos</p>
             </div>
             
             <div class="carousel-wrapper">
@@ -261,8 +277,10 @@
         <!-- DOBRA 3: O QUE VAI APRENDER -->
         <section class="py-24 px-6 max-w-6xl mx-auto">
             <div class="text-center mb-16">
-                <h2 class="text-3xl md:text-4xl mb-4 font-bold">> O QUE VOCÊ VAI APRENDER A FAZER NESSE CURSO:</h2>
-                <p class="text-gray-400 max-w-3xl mx-auto text-lg">
+                <!-- Ajuste Mobile: text-xl -->
+                <h2 class="text-xl md:text-4xl mb-4 font-bold">> O QUE VOCÊ VAI APRENDER A FAZER NESSE CURSO:</h2>
+                <!-- Ajuste Mobile: text-sm -->
+                <p class="text-gray-400 max-w-3xl mx-auto text-sm md:text-lg">
                     Domine a nova era do criador fantasma. A inteligência artificial pesquisa, roteiriza e narra. Você apenas junta as peças e cria vídeos altamente virais nos formatos mais lucrativos da internet.
                 </p>
             </div>
@@ -295,8 +313,10 @@
                     <img id="img-anderson" src="" alt="Anderson Rêgo" class="relative z-10 rounded-3xl border border-white/10 grayscale hover:grayscale-0 transition-all duration-700 shadow-2xl w-full">
                 </div>
                 <div class="w-full md:w-1/2">
-                    <h2 class="text-3xl md:text-5xl mb-6 font-bold">AFINAL, QUEM É ANDERSON RÊGO?</h2>
-                    <div class="space-y-6 text-gray-300 leading-relaxed text-lg">
+                    <!-- Ajuste Mobile: text-2xl -->
+                    <h2 class="text-2xl md:text-5xl mb-6 font-bold">AFINAL, QUEM É ANDERSON RÊGO?</h2>
+                    <!-- Ajuste Mobile: text-sm -->
+                    <div class="space-y-6 text-gray-300 leading-relaxed text-sm md:text-lg">
                         <p>Produtor de conteúdo e especialista em automação digital. Anderson é a mente por trás de canais que faturam em dólar todos os meses de forma totalmente invisível.</p>
                         <p>Após conquistar a cobiçada placa de prata do YouTube (100 mil inscritos) atuando apenas nos bastidores, ele decidiu abrir a caixa preta da sua operação.</p>
                         <p>Aqui, você não vai aprender a ser apenas um editor de vídeos comum. Você será treinado para se tornar o dono de uma verdadeira fábrica de conteúdo sintético.</p>
@@ -305,17 +325,16 @@
             </div>
         </section>
 
-        <!-- LÂMINA: DEPOIMENTO EM VÍDEO (REFINADO PARA VIMEO) -->
+        <!-- LÂMINA: DEPOIMENTO EM VÍDEO (YOUTUBE LOOP) -->
         <section class="py-24 px-6 bg-black">
             <div class="max-w-4xl mx-auto">
                 <div class="text-center mb-12">
-                    <h2 class="text-2xl md:text-4xl font-bold mb-4 uppercase">> VEJA O QUE UM ALUNO ALCANÇOU:</h2>
-                    <p class="text-gray-500">Resultados reais de quem aplicou o protocolo da fábrica anónima.</p>
+                    <!-- Ajuste Mobile: text-xl -->
+                    <h2 class="text-xl md:text-4xl font-bold mb-4 uppercase">> VEJA O QUE UM ALUNO ALCANÇOU:</h2>
+                    <p class="text-gray-500 text-sm">Resultados reais de quem aplicou o protocolo da fábrica anónima.</p>
                 </div>
                 <div class="glass-panel p-4 md:p-8 rounded-[2rem] border border-green-500/20">
-                    <!-- Container responsivo 16:9 -->
                     <div id="depoimento-video-container" class="video-container rounded-2xl overflow-hidden bg-zinc-900 shadow-2xl">
-                        <!-- O iframe limpo do Vimeo será injetado aqui -->
                     </div>
                 </div>
             </div>
@@ -324,7 +343,8 @@
         <!-- DOBRA 5: ESTRUTURA DO CURSO -->
         <section class="py-24 px-6 bg-zinc-950/50">
             <div class="max-w-6xl mx-auto">
-                <h2 class="text-2xl md:text-4xl text-center mb-16 font-bold">> DENTRO DO CURSO SHORTS MILIONÁRIOS, VOCÊ TERÁ ACESSO AO MAPA COMPLETO:</h2>
+                <!-- Ajuste Mobile: text-xl -->
+                <h2 class="text-xl md:text-4xl text-center mb-16 font-bold">> DENTRO DO CURSO SHORTS MILIONÁRIOS, VOCÊ TERÁ ACESSO AO MAPA COMPLETO:</h2>
                 <div class="grid md:grid-cols-3 gap-8">
                     <div class="glass-panel p-8 rounded-3xl border border-red-500/20">
                         <h3 class="text-xl font-bold red-text mb-4">MÓDULO 0: O SETUP DO IMPÉRIO</h3>
@@ -345,17 +365,18 @@
         <!-- DOBRA 6: BÔNUS -->
         <section class="py-24 px-6">
             <div class="max-w-6xl mx-auto">
-                <h2 class="text-2xl md:text-4xl text-center mb-16 font-bold">> E PARA OS PRIMEIROS 100 QUE GARANTIREM A VAGA HOJE... SEPAREI 2 BÔNUS VIP INÉDITOS:</h2>
+                <!-- Ajuste Mobile: text-xl -->
+                <h2 class="text-xl md:text-4xl text-center mb-16 font-bold">> E PARA OS PRIMEIROS 100 QUE GARANTIREM A VAGA HOJE... SEPAREI 2 BÔNUS VIP INÉDITOS:</h2>
                 <div class="grid md:grid-cols-2 gap-8">
                     <div class="bonus-box p-8 rounded-[2rem] relative overflow-hidden">
                         <div class="absolute top-0 right-0 bg-red-600 px-4 py-1 text-[10px] font-bold">100% GRÁTIS</div>
-                        <h3 class="text-xl font-bold mb-4 uppercase">🎁 BÔNUS VIP 1: A MÁQUINA DE PODCASTS COM I.A.</h3>
+                        <h3 class="text-xl font-bold mb-4 uppercase text-sm md:text-xl">🎁 BÔNUS VIP 1: A MÁQUINA DE PODCASTS COM I.A.</h3>
                         <p class="text-sm text-gray-300 mb-6 leading-relaxed">O atalho definitivo para bater as 4.000 horas do YouTube rápido.</p>
                         <p class="text-green-500 font-bold">HOJE: TOTALMENTE GRÁTIS</p>
                     </div>
                     <div class="bonus-box p-8 rounded-[2rem] relative overflow-hidden">
                         <div class="absolute top-0 right-0 bg-red-600 px-4 py-1 text-[10px] font-bold">100% GRÁTIS</div>
-                        <h3 class="text-xl font-bold mb-4 uppercase">📸 BÔNUS VIP 2: MÉTODO DE BASTIDORES VIRAIS</h3>
+                        <h3 class="text-xl font-bold mb-4 uppercase text-sm md:text-xl">📸 BÔNUS VIP 2: MÉTODO DE BASTIDORES VIRAIS</h3>
                         <p class="text-sm text-gray-300 mb-6 leading-relaxed">O nicho de fãs e terror é explosivo. Entregamos os prompts técnicos exatos.</p>
                         <p class="text-green-500 font-bold">HOJE: TOTALMENTE GRÁTIS</p>
                     </div>
@@ -367,14 +388,15 @@
         <section class="py-24 px-6 text-center">
             <div class="max-w-5xl mx-auto flex flex-col md:flex-row glass-panel rounded-[3rem] overflow-hidden border-2 border-red-600/20">
                 <div class="w-full md:w-1/2 p-12 bg-red-900/5 flex flex-col justify-center text-left">
-                    <h2 class="text-2xl font-bold mb-6 font-heading">> ESSA É A ÚNICA OPORTUNIDADE QUE PODE MUDAR A SUA REALIDADE FINANCEIRA.</h2>
-                    <p class="text-gray-400">Acesso imediato ao ecossistema Shorts Milionários e aos bônus secretos.</p>
+                    <h2 class="text-xl md:text-2xl font-bold mb-6 font-heading">> ESSA É A ÚNICA OPORTUNIDADE QUE PODE MUDAR A SUA REALIDADE FINANCEIRA.</h2>
+                    <p class="text-gray-400 text-sm md:text-base">Acesso imediato ao ecossistema Shorts Milionários e aos bônus secretos.</p>
                 </div>
                 <div class="w-full md:w-1/2 p-12 bg-black flex flex-col justify-center items-center">
-                    <p class="text-gray-500 line-through mb-2 text-xl">VALOR REAL: R$ 391,00</p>
-                    <h3 class="text-7xl md:text-8xl font-black neon-text mb-4">R$ 47</h3>
-                    <p class="text-gray-500 text-xs mb-8 uppercase tracking-widest">(Ou parcele em até 5x no cartão)</p>
-                    <a href="https://pay.hotmart.com/Y101106544Q?checkoutMode=10" target="_blank" rel="noopener noreferrer" class="neon-btn w-full py-8 rounded-3xl text-xl md:text-xl uppercase shadow-2xl">
+                    <p class="text-gray-500 line-through mb-2 text-lg md:text-xl">VALOR REAL: R$ 391,00</p>
+                    <!-- Ajuste Mobile: text-5xl -->
+                    <h3 class="text-5xl md:text-8xl font-black neon-text mb-4">R$ 47</h3>
+                    <p class="text-gray-500 text-[10px] md:text-xs mb-8 uppercase tracking-widest">(Ou parcele em até 5x no cartão)</p>
+                    <a href="https://pay.hotmart.com/Y101106544Q?checkoutMode=10" target="_blank" rel="noopener noreferrer" class="neon-btn w-full py-8 rounded-3xl text-lg md:text-xl uppercase shadow-2xl">
                         SIM! QUERO GARANTIR MEU CURSO
                     </a>
                 </div>
@@ -385,9 +407,10 @@
         <section class="py-24 px-6 bg-zinc-950">
             <div class="max-w-4xl mx-auto">
                 <div class="text-center mb-16">
-                    <img id="img-garantia" src="" alt="7 Dias de Garantia" class="w-32 mx-auto mb-8 grayscale hover:grayscale-0 transition-all">
-                    <h2 class="text-3xl font-bold mb-4 uppercase tracking-tighter">Perguntas Frequentes & Objeções</h2>
-                    <p class="text-gray-400 text-lg leading-relaxed max-w-2xl mx-auto">Tire todas as suas dúvidas antes de entrar para a elite da Fábrica Anônima.</p>
+                    <img id="img-garantia" src="" alt="7 Dias de Garantia" class="w-24 md:w-32 mx-auto mb-8 grayscale hover:grayscale-0 transition-all">
+                    <!-- Ajuste Mobile: text-xl -->
+                    <h2 class="text-xl md:text-3xl font-bold mb-4 uppercase tracking-tighter">Perguntas Frequentes & Objeções</h2>
+                    <p class="text-gray-400 text-sm md:text-lg leading-relaxed max-w-2xl mx-auto">Tire todas as suas dúvidas antes de entrar para a elite da Fábrica Anônima.</p>
                 </div>
                 
                 <div class="space-y-4" id="faq-container">
@@ -395,22 +418,25 @@
             </div>
         </section>
 
-        <!-- RODAPÉ -->
-        <footer class="py-16 px-6 text-center text-[10px] text-gray-700 uppercase tracking-widest border-t border-white/5 bg-black">
+        <!-- RODAPÉ REFORÇADO -->
+        <footer class="py-16 px-6 text-center bg-black border-t border-white/5">
             <div class="max-w-4xl mx-auto">
-                <p class="mb-6">© 2026 Anderson Rêgo - Terreno Digital</p>
-                <div class="flex flex-wrap justify-center gap-4 md:gap-8">
-                    <a href="https://politicadeprivacidademilionarios.netlify.app/" target="_blank" rel="noopener noreferrer" class="hover:text-green-500 transition-colors">Política de Privacidade</a>
-                    <span class="hidden md:inline text-gray-800">|</span>
-                    <a href="https://termosecondocoesmilionarios.netlify.app/" target="_blank" rel="noopener noreferrer" class="hover:text-green-500 transition-colors">Termos e Condições</a>
+                <p class="text-[10px] text-gray-600 uppercase tracking-widest mb-8">© 2026 Anderson Rêgo - Terreno Digital</p>
+                
+                <!-- Links de Políticas mais visíveis -->
+                <div class="flex flex-col md:flex-row justify-center items-center gap-6">
+                    <a href="https://politicadeprivacidademilionarios.netlify.app/" target="_blank" rel="noopener noreferrer" class="text-[10px] md:text-xs font-bold text-gray-400 hover:text-green-500 transition-colors uppercase border border-white/10 px-4 py-2 rounded-lg w-full md:w-auto">Política de Privacidade</a>
+                    <a href="https://termosecondocoesmilionarios.netlify.app/" target="_blank" rel="noopener noreferrer" class="text-[10px] md:text-xs font-bold text-gray-400 hover:text-green-500 transition-colors uppercase border border-white/10 px-4 py-2 rounded-lg w-full md:w-auto">Termos e Condições</a>
                 </div>
+                
+                <p class="mt-12 text-[8px] md:text-[9px] text-gray-800 opacity-60 leading-relaxed max-w-2xl mx-auto uppercase">Este site não faz parte do Google ou do Facebook. Além disso, este site NÃO é endossado pelo Google ou Facebook de nenhuma maneira.</p>
             </div>
         </footer>
     </div>
 
     <!-- STICKY MOBILE CTA -->
     <div id="sticky-cta" class="sticky-cta md:hidden">
-        <a href="https://pay.hotmart.com/Y101106544Q?checkoutMode=10" target="_blank" rel="noopener noreferrer" class="neon-btn w-full py-5 rounded-2xl text-lg uppercase shadow-2xl">
+        <a href="https://pay.hotmart.com/Y101106544Q?checkoutMode=10" target="_blank" rel="noopener noreferrer" class="neon-btn w-full py-5 rounded-2xl text-lg uppercase shadow-2xl border-2 border-green-400/20">
             GARANTIR MINHA VAGA: R$ 47
         </a>
     </div>
@@ -420,10 +446,9 @@
         // CONFIGURAÇÕES DE LINKS E CONTEÚDO
         // ==========================================
         const CONFIG_PAGINA = {
-            vslVideoUrl: "COLOCAR_LINK_DA_VSL_AQUI", 
-            
-            // LINK DO VIMEO (Atualizado para o link solicitado)
-            depoimentoVimeoUrl: "https://player.vimeo.com/video/1166969694?badge=0&autopause=0&player_id=0&app_id=58479",
+            // IDs do YouTube para VSL e Depoimento
+            vslVideoId: "HgHQ6i9VhD0", // COLOQUE O ID DA VSL AQUI
+            depoimentoVideoId: "HgHQ6i9VhD0", // ID DO DEPOIMENTO
 
             vslThumb: "https://i.postimg.cc/cCVY4c2n/Thumbnail-VSL.jpg",
             anime: "https://i.postimg.cc/cH4KBzfd/Goku-Forte.png",
@@ -505,11 +530,11 @@
                     const details = document.createElement('details');
                     details.className = "glass-panel p-6 rounded-2xl cursor-pointer group transition-all duration-300 hover:border-green-500/40";
                     details.innerHTML = `
-                        <summary class="font-bold list-none flex justify-between items-center uppercase text-sm tracking-tighter">
+                        <summary class="font-bold list-none flex justify-between items-center uppercase text-xs md:text-sm tracking-tighter">
                             ${item.q} 
                             <span class="text-green-500 transition-transform duration-300">▼</span>
                         </summary>
-                        <p class="mt-4 text-sm text-gray-400 leading-relaxed border-t border-white/5 pt-4">
+                        <p class="mt-4 text-xs md:text-sm text-gray-400 leading-relaxed border-t border-white/5 pt-4">
                             ${item.a}
                         </p>
                     `;
@@ -542,22 +567,29 @@
                 const videoPlayerContainer = document.getElementById('vsl-player-container');
                 const depoVideoContainer = document.getElementById('depoimento-video-container');
                 
-                // Injeção VSL
-                if (CONFIG_PAGINA.vslVideoUrl !== "COLOCAR_LINK_DA_VSL_AQUI" && vslPlaceholder) {
+                // Injeção VSL (YouTube Loop)
+                if (CONFIG_PAGINA.vslVideoId && vslPlaceholder) {
                     vslPlaceholder.style.display = 'none';
                     videoPlayerContainer.classList.add('active');
-                    videoPlayerContainer.innerHTML = `<div class="video-container"><iframe src="${CONFIG_PAGINA.vslVideoUrl}" allow="autoplay; fullscreen" allowfullscreen></iframe></div>`;
+                    const id = CONFIG_PAGINA.vslVideoId;
+                    videoPlayerContainer.innerHTML = `
+                        <div class="video-container shadow-2xl">
+                            <iframe 
+                                src="https://www.youtube.com/embed/${id}?autoplay=0&controls=1&rel=0&modestbranding=1&loop=1&playlist=${id}" 
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                                allowfullscreen>
+                            </iframe>
+                        </div>`;
                 }
 
-                // Injeção DEPOIMENTO LIMPO (Vimeo)
-                if (CONFIG_PAGINA.depoimentoVimeoUrl && depoVideoContainer) {
+                // Injeção DEPOIMENTO (YouTube Loop)
+                if (CONFIG_PAGINA.depoimentoVideoId && depoVideoContainer) {
+                    const id = CONFIG_PAGINA.depoimentoVideoId;
                     depoVideoContainer.innerHTML = `
                         <iframe 
-                            src="${CONFIG_PAGINA.depoimentoVimeoUrl}" 
-                            width="100%" 
-                            height="100%" 
-                            frameborder="0" 
-                            allow="autoplay; fullscreen; picture-in-picture" 
+                            width="100%" height="100%" style="border: none;"
+                            src="https://www.youtube.com/embed/${id}?autoplay=0&controls=1&rel=0&modestbranding=1&loop=1&playlist=${id}" 
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
                             allowfullscreen>
                         </iframe>`;
                 }
