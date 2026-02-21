@@ -144,52 +144,29 @@
             border: 0;
         }
 
-        /* --- CARROSSEL INFINITO --- */
-        .carousel-wrapper {
+        /* --- ESTILO DOS PRINTS COMPACTOS --- */
+        .print-card {
             width: 100%;
-            overflow: hidden; /* Trava o scroll manual para não quebrar a animação infinita */
-            position: relative;
-            padding: 40px 0;
-            cursor: pointer;
-            user-select: none;
-            -webkit-user-select: none;
+            aspect-ratio: 9/16;
+            border-radius: 0.75rem;
+            overflow: hidden;
+            border: 1px solid rgba(255,255,255,0.08);
+            background: #000;
+            transition: all 0.3s ease;
         }
         
-        .carousel-track {
-            display: flex;
-            width: max-content; 
-            animation: scroll 120s linear infinite; 
-            gap: 1.5rem;
-        }
-        
-        /* Pausa a animação ao clicar/segurar */
-        .carousel-wrapper:active .carousel-track {
-            animation-play-state: paused;
+        .print-card:hover {
+            transform: scale(1.05);
+            border-color: var(--neon);
+            z-index: 20;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.8);
         }
 
-        .print-card {
-            width: 280px;
-            aspect-ratio: 9/16;
-            flex-shrink: 0;
-            border-radius: 1rem;
-            overflow: hidden;
-            border: 2px solid rgba(255,255,255,0.05);
-            background: #000;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-        }
-        
         .print-card img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            pointer-events: none;
             image-rendering: -webkit-optimize-contrast;
-        }
-
-        /* Animação que desloca exatamente o tamanho de um conjunto (20 itens) */
-        @keyframes scroll {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(calc(-280px * 20 - 1.5rem * 20)); }
         }
 
         details summary::-webkit-details-marker { display: none; }
@@ -209,21 +186,21 @@
     <!-- DOBRA 1: HERO SECTION -->
     <section class="min-h-screen flex flex-col items-center justify-center p-6 relative">
         <div class="max-w-5xl w-full text-center">
-            <div class="mb-6 inline-flex items-center gap-2 px-3 py-1 rounded border border-red-500/20 bg-red-500/5 text-red-500 text-[10px] tracking-[0.2em] uppercase font-bold">
+            <div class="mb-4 inline-flex items-center gap-2 px-3 py-1 rounded border border-red-500/20 bg-red-500/5 text-red-500 text-[10px] tracking-[0.2em] uppercase font-bold">
                 <span class="w-2 h-2 rounded-full bg-red-600 animate-ping"></span>
                 ⚠️ A MAIOR TRANSFERÊNCIA DE RIQUEZA DIGITAL DA DÉCADA COMEÇOU...
             </div>
             
-            <h1 class="text-2xl md:text-7xl mb-8 leading-tight md:leading-none font-black tracking-tighter">
+            <h1 class="text-2xl md:text-7xl mb-6 leading-tight md:leading-none font-black tracking-tighter">
                 A única linha de montagem validada para criar uma <span class="neon-text">fábrica de renda anônima</span> no YouTube... sem mostrar o rosto e sem usar a própria voz.
             </h1>
             
-            <p class="text-gray-400 text-sm md:text-xl mb-12 max-w-3xl mx-auto italic font-light leading-relaxed">
+            <p class="text-gray-400 text-sm md:text-xl mb-8 md:mb-12 max-w-3xl mx-auto italic font-light leading-relaxed">
                 Assista ao vídeo abaixo antes que ele saia do ar e descubra o protocolo de produção sintética trabalhando apenas 30 minutos por dia. <span class="text-white font-bold">(🔊 Ligue o som)</span>
             </p>
 
             <!-- VSL BOX -->
-            <div class="glass-panel rounded-3xl p-3 md:p-6 mb-10 relative overflow-hidden scanner">
+            <div class="glass-panel rounded-3xl p-3 md:p-6 mb-8 relative overflow-hidden scanner">
                 <div class="aspect-video bg-black rounded-2xl flex items-center justify-center relative overflow-hidden" id="vsl-placeholder">
                     <img id="img-vsl-thumb" src="" alt="Capa da VSL" class="absolute inset-0 w-full h-full object-cover">
                     <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
@@ -233,7 +210,7 @@
 
             <!-- BOTÃO COM DELAY -->
             <div id="cta-node" class="hidden-node">
-                <a href="https://pay.hotmart.com/Y101106544Q?checkoutMode=10" target="_blank" rel="noopener noreferrer" class="neon-btn w-full md:w-auto px-8 md:px-12 py-3 md:py-7 rounded-full text-[13px] md:text-2xl uppercase tracking-tighter shadow-green-500/20">
+                <a href="https://pay.hotmart.com/Y101106544Q?checkoutMode=10" target="_blank" rel="noopener noreferrer" class="neon-btn w-full md:w-auto px-8 md:px-12 py-3 md:py-6 rounded-full text-[13px] md:text-2xl uppercase tracking-tighter shadow-green-500/20">
                     QUERO COMEÇAR MINHA FÁBRICA AGORA!
                 </a>
                 <p class="mt-4 text-[10px] text-gray-500">🔒 Compra 100% Segura. Acesso Imediato.</p>
@@ -245,10 +222,10 @@
     <div id="main-content" class="hidden-node">
         
         <!-- DOBRA 2: IDENTIFICAÇÃO -->
-        <section class="py-24 px-6 bg-zinc-950/80">
+        <section class="py-12 px-6 bg-zinc-950/80">
             <div class="max-w-6xl mx-auto">
-                <h2 class="text-xl md:text-4xl text-center mb-16 font-bold tracking-tight">> VOCÊ SE IDENTIFICA COM ALGUMA DESSAS SITUAÇÕES?</h2>
-                <div class="grid md:grid-cols-3 gap-8">
+                <h2 class="text-xl md:text-4xl text-center mb-10 font-bold tracking-tight uppercase">> VOCÊ SE IDENTIFICA COM ALGUMA DESSAS SITUAÇÕES?</h2>
+                <div class="grid md:grid-cols-3 gap-6">
                     <div class="glass-panel p-8 rounded-3xl border-l-4 border-red-600">
                         <div class="text-3xl mb-4">⏰</div>
                         <p class="text-white text-sm leading-relaxed">
@@ -271,23 +248,30 @@
             </div>
         </section>
 
-        <!-- LÂMINA: CARROSSEL INFINITO -->
-        <section class="py-24 bg-zinc-900/40 border-y border-white/5 relative overflow-hidden">
-            <div class="max-w-7xl mx-auto px-6 mb-12 text-center">
-                <h2 class="text-2xl md:text-5xl font-black neon-text mb-4">RECONHECIMENTO MÁXIMO</h2>
-                <p class="text-gray-400 uppercase tracking-widest text-[10px] md:text-sm italic">Clique e segure para pausar a leitura</p>
+        <!-- LÂMINA: TODOS OS PRINTS (GRELHA COMPACTA E RESPONSIVA - DIVISORES DE 20) -->
+        <section class="py-12 bg-zinc-900/40 border-y border-white/5 relative">
+            <div class="max-w-7xl mx-auto px-6 mb-8 text-center">
+                <h2 class="text-2xl md:text-5xl font-black neon-text mb-2">RECONHECIMENTO MÁXIMO</h2>
+                <p class="text-gray-400 uppercase tracking-widest text-[10px] md:text-sm italic">Resultados reais de quem já opera a fábrica</p>
             </div>
             
-            <div class="carousel-wrapper">
-                <div class="carousel-track" id="carousel-prints">
+            <div class="max-w-7xl mx-auto px-4">
+                <!-- Grelha Responsiva Ajustada: mobile 2, tablet 4, desktop 5 (Divisores de 20 para evitar sobras) -->
+                <div class="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-5 gap-2 md:gap-4" id="carousel-prints">
+                    <!-- Preenchido via JS com todos os 20 prints -->
+                </div>
+                <div class="mt-10 text-center">
+                    <a href="https://pay.hotmart.com/Y101106544Q?checkoutMode=10" target="_blank" class="neon-btn px-10 py-4 rounded-2xl text-xs md:text-sm uppercase tracking-widest shadow-xl">
+                        QUERO TER ESSES RESULTADOS
+                    </a>
                 </div>
             </div>
         </section>
 
         <!-- DOBRA 3: O QUE VAI APRENDER -->
-        <section class="py-24 px-6 max-w-6xl mx-auto">
-            <div class="text-center mb-16">
-                <h2 class="text-xl md:text-4xl mb-4 font-bold">> O QUE VOCÊ VAI APRENDER A FAZER NESSE CURSO:</h2>
+        <section class="py-12 px-6 max-w-6xl mx-auto">
+            <div class="text-center mb-10">
+                <h2 class="text-xl md:text-4xl mb-4 font-bold uppercase">> O QUE VOCÊ VAI APRENDER A FAZER:</h2>
                 <p class="text-gray-400 max-w-3xl mx-auto text-sm md:text-lg">
                     Domine a nova era do criador fantasma. A inteligência artificial pesquisa, roteiriza e narra. Você apenas junta as peças e cria vídeos altamente virais.
                 </p>
@@ -314,14 +298,14 @@
         </section>
 
         <!-- DOBRA 4: AUTORIDADE -->
-        <section class="py-24 px-6 authority-bg">
-            <div class="max-w-6xl mx-auto flex flex-col md:flex-row items-center gap-12">
+        <section class="py-12 px-6 authority-bg">
+            <div class="max-w-6xl mx-auto flex flex-col md:flex-row items-center gap-10">
                 <div class="w-full md:w-1/2 relative">
                     <div class="absolute inset-0 bg-green-500/20 blur-[80px] rounded-full"></div>
                     <img id="img-anderson" src="" alt="Anderson Rêgo" class="relative z-10 rounded-3xl border border-white/10 shadow-2xl w-full">
                 </div>
                 <div class="w-full md:w-1/2">
-                    <h2 class="text-2xl md:text-5xl mb-6 font-bold">AFINAL, QUEM É ANDERSON RÊGO?</h2>
+                    <h2 class="text-2xl md:text-5xl mb-6 font-bold uppercase">AFINAL, QUEM É ANDERSON RÊGO?</h2>
                     <div class="space-y-6 text-gray-300 leading-relaxed text-sm md:text-lg">
                         <p>Produtor de conteúdo e especialista em automação digital. Anderson é a mente por trás de canais que faturam em dólar todos os meses de forma totalmente invisível.</p>
                         <p>Após conquistar a cobiçada placa de prata do YouTube (100 mil inscritos) atuando apenas nos bastidores, ele decidiu abrir a caixa preta da sua operação.</p>
@@ -331,9 +315,9 @@
         </section>
 
         <!-- LÂMINA: DEPOIMENTO EM VÍDEO -->
-        <section class="py-24 px-6 bg-black">
+        <section class="py-12 px-6 bg-black">
             <div class="max-w-4xl mx-auto">
-                <div class="text-center mb-12">
+                <div class="text-center mb-8">
                     <h2 class="text-xl md:text-4xl font-bold mb-4 uppercase">> VEJA O QUE UM ALUNO ALCANÇOU:</h2>
                     <p class="text-gray-500 text-sm">Resultados reais de quem aplicou o protocolo da fábrica anónima.</p>
                 </div>
@@ -345,13 +329,13 @@
         </section>
 
         <!-- DOBRA 6: BÔNUS -->
-        <section class="py-24 px-6">
+        <section class="py-12 px-6">
             <div class="max-w-6xl mx-auto">
-                <h2 class="text-xl md:text-4xl text-center mb-16 font-bold">> E PARA OS PRIMEIROS 100... SEPAREI 2 BÔNUS VIP:</h2>
-                <div class="grid md:grid-cols-2 gap-8">
+                <h2 class="text-xl md:text-4xl text-center mb-10 font-bold uppercase">> BÔNUS VIP PARA OS PRIMEIROS 100:</h2>
+                <div class="grid md:grid-cols-2 gap-6">
                     <div class="bonus-box p-8 rounded-[2rem] relative overflow-hidden flex flex-col">
                         <div class="absolute top-0 right-0 bg-red-600 px-4 py-1 text-[10px] font-bold">VALOR: R$ 197,00</div>
-                        <h3 class="text-xl font-bold mb-4 uppercase text-sm md:text-xl">🎁 BÔNUS VIP 1: A MÁQUINA DE PODCASTS COM I.A.</h3>
+                        <h3 class="text-xl font-bold mb-4 uppercase text-sm md:text-xl">🎁 BÔNUS 1: A MÁQUINA DE PODCASTS COM I.A.</h3>
                         <p class="text-sm text-gray-300 mb-6 leading-relaxed flex-grow">O atalho definitivo para bater as 4.000 horas do YouTube rápido com podcasts fictícios.</p>
                         <div class="flex items-center gap-3">
                             <span class="text-gray-500 line-through text-xs font-bold italic">DE R$ 197,00</span>
@@ -360,7 +344,7 @@
                     </div>
                     <div class="bonus-box p-8 rounded-[2rem] relative overflow-hidden flex flex-col">
                         <div class="absolute top-0 right-0 bg-red-600 px-4 py-1 text-[10px] font-bold">VALOR: R$ 147,00</div>
-                        <h3 class="text-xl font-bold mb-4 uppercase text-sm md:text-xl">📸 BÔNUS VIP 2: MÉTODO DE BASTIDORES VIRAIS</h3>
+                        <h3 class="text-xl font-bold mb-4 uppercase text-sm md:text-xl">📸 BÔNUS 2: MÉTODO DE BASTIDORES VIRAIS</h3>
                         <p class="text-sm text-gray-300 mb-6 leading-relaxed flex-grow">Entregamos os prompts técnicos para gerar cenários hiper-realistas de terror e ídolos.</p>
                         <div class="flex items-center gap-3">
                             <span class="text-gray-500 line-through text-xs font-bold italic">DE R$ 147,00</span>
@@ -372,38 +356,39 @@
         </section>
 
         <!-- DOBRA 7: OFERTA FINAL -->
-        <section class="py-24 px-6 text-center">
+        <section class="py-12 px-6 text-center">
             <div class="max-w-5xl mx-auto flex flex-col md:flex-row glass-panel rounded-[3rem] overflow-hidden border-2 border-red-600/20">
-                <div class="w-full md:w-1/2 p-12 bg-red-900/5 flex flex-col justify-center text-left">
-                    <h2 class="text-xl md:text-2xl font-bold mb-6 font-heading">> ESSA É A ÚNICA OPORTUNIDADE QUE PODE MUDAR A SUA REALIDADE FINANCEIRA.</h2>
+                <div class="w-full md:w-1/2 p-10 md:p-12 bg-red-900/5 flex flex-col justify-center text-left">
+                    <h2 class="text-xl md:text-2xl font-bold mb-6 font-heading uppercase">> ESSA É A ÚNICA OPORTUNIDADE QUE PODE MUDAR A SUA REALIDADE FINANCEIRA.</h2>
                     <p class="text-gray-400 text-sm md:text-base">Acesso imediato ao arsenal completo Shorts Milionários.</p>
                 </div>
-                <div class="w-full md:w-1/2 p-12 bg-black flex flex-col justify-center items-center">
+                <div class="w-full md:w-1/2 p-10 md:p-12 bg-black flex flex-col justify-center items-center">
                     <p class="text-gray-500 line-through mb-2 text-lg md:text-xl">VALOR TOTAL: R$ 391,00</p>
                     <h3 class="text-5xl md:text-8xl font-black neon-text mb-4">R$ 47</h3>
                     <p class="text-gray-500 text-[10px] md:text-xs mb-8 uppercase tracking-widest">(Ou em até 5x no cartão)</p>
                     <a href="https://pay.hotmart.com/Y101106544Q?checkoutMode=10" target="_blank" rel="noopener noreferrer" class="neon-btn w-full py-4 md:py-8 rounded-3xl text-[13px] md:text-xl uppercase shadow-2xl">
-                        QUERO GARANTIR MINHA VAGA
+                        GARANTIR MINHA VAGA AGORA
                     </a>
                 </div>
             </div>
         </section>
 
         <!-- DOBRA 8: FAQ -->
-        <section class="py-24 px-6 bg-zinc-950">
+        <section class="py-12 px-6 bg-zinc-950">
             <div class="max-w-4xl mx-auto">
-                <div class="text-center mb-16">
-                    <img id="img-garantia" src="" alt="7 Dias de Garantia" class="w-24 md:w-32 mx-auto mb-8 transition-all hover:scale-110">
-                    <h2 class="text-xl md:text-3xl font-bold mb-4 uppercase tracking-tighter">Perguntas Frequentes</h2>
-                    <p class="text-gray-400 text-sm md:text-lg max-w-2xl mx-auto">Dúvidas comuns respondidas.</p>
+                <div class="text-center mb-10">
+                    <img id="img-garantia" src="" alt="7 Dias de Garantia" class="w-24 md:w-28 mx-auto mb-6 transition-all hover:scale-110">
+                    <h2 class="text-xl md:text-3xl font-bold mb-2 uppercase tracking-tighter">Perguntas Frequentes</h2>
+                    <p class="text-gray-400 text-sm md:text-lg max-w-2xl mx-auto">Tire as suas dúvidas finais.</p>
                 </div>
                 <div class="space-y-4" id="faq-container">
+                    <!-- Preenchido via JS com TODAS as perguntas -->
                 </div>
             </div>
         </section>
 
         <!-- RODAPÉ -->
-        <footer class="py-16 px-6 text-center bg-black border-t border-white/5">
+        <footer class="py-10 px-6 text-center bg-black border-t border-white/5">
             <div class="max-w-4xl mx-auto">
                 <p class="text-[10px] text-gray-600 uppercase tracking-widest mb-10">© 2026 Anderson Rêgo - Terreno Digital</p>
                 
@@ -420,7 +405,7 @@
     <!-- STICKY MOBILE CTA -->
     <div id="sticky-cta" class="sticky-cta md:hidden">
         <a href="https://pay.hotmart.com/Y101106544Q?checkoutMode=10" target="_blank" rel="noopener noreferrer" class="neon-btn w-full py-3 rounded-2xl text-[13px] uppercase shadow-2xl border border-green-400/30">
-            QUERO O CURSO: R$ 47
+            GARANTIR ACESSO: R$ 47
         </a>
     </div>
 
@@ -438,14 +423,30 @@
             garantia: "https://i.postimg.cc/FzG1dVYd/Garantia-7-dias.webp",
 
             prints: [
-                "https://i.postimg.cc/wjL6Pdzt/1.png", "https://i.postimg.cc/4yRCpYK2/2.png", "https://i.postimg.cc/brg6dr1t/1-(3).png", "https://i.postimg.cc/kXj1mVJr/1-(4).png", "https://i.postimg.cc/j5Qck2gp/1-(5).png",
-                "https://i.postimg.cc/Y0d3MVwL/1-(6).png", "https://i.postimg.cc/J4dqF9qY/1-(7).png", "https://i.postimg.cc/FRmgcmr7/1-(8).png", "https://i.postimg.cc/90gGv7GR/9.png", "https://i.postimg.cc/7Yc39SHt/10.png",
-                "https://i.postimg.cc/L55PB8rS/1-(11).png", "https://i.postimg.cc/X7T5d3xY/1-(12).png", "https://i.postimg.cc/d09ZbCF8/1-(13).png", "https://i.postimg.cc/Jn6DnWGs/1-(14).png", "https://i.postimg.cc/Xqtrfcfh/1-(15).png",
-                "https://i.postimg.cc/nhbsM2c9/1-(16).png", "https://i.postimg.cc/SKmJfK9j/1-(17).png", "https://i.postimg.cc/W33zxfSm/1-(18).png", "https://i.postimg.cc/4dSyGbSV/1-(19).png", "https://i.postimg.cc/BtWvLZs9/1-(20).png"
+                "https://i.postimg.cc/wjL6Pdzt/1.png", 
+                "https://i.postimg.cc/3w9TGXmS/2.png", 
+                "https://i.postimg.cc/brg6dr1t/1-(3).png", 
+                "https://i.postimg.cc/kXj1mVJr/1-(4).png", 
+                "https://i.postimg.cc/j5Qck2gp/1-(5).png",
+                "https://i.postimg.cc/Y0d3MVwL/1-(6).png", 
+                "https://i.postimg.cc/J4dqF9qY/1-(7).png", 
+                "https://i.postimg.cc/FRmgcmr7/1-(8).png", 
+                "https://i.postimg.cc/90gGv7GR/9.png", 
+                "https://i.postimg.cc/7Yc39SHt/10.png",
+                "https://i.postimg.cc/L55PB8rS/1-(11).png", 
+                "https://i.postimg.cc/X7T5d3xY/1-(12).png", 
+                "https://i.postimg.cc/d09ZbCF8/1-(13).png", 
+                "https://i.postimg.cc/Jn6DnWGs/1-(14).png", 
+                "https://i.postimg.cc/Xqtrfcfh/1-(15).png",
+                "https://i.postimg.cc/nhbsM2c9/1-(16).png", 
+                "https://i.postimg.cc/SKmJfK9j/1-(17).png", 
+                "https://i.postimg.cc/W33zxfSm/1-(18).png", 
+                "https://i.postimg.cc/4dSyGbSV/1-(19).png", 
+                "https://i.postimg.cc/BtWvLZs9/1-(20).png"
             ],
 
             faq: [
-                { q: "Preciso de algum conhecimento prévio?", a: "Absolutamente não. O curso foca 100% na criação do conteúdo do zero. Nós vamos guiá-lo passo a passo, clique a clique, até sua primeira novela animada ou vídeo viral publicado." },
+                { q: "Preciso de algum conhecimento prévio?", a: "Absolutamente não. O curso foca 100% na criação do conteúdo do zero. Nós vamos guiá-lo passo a passo, clique a clique, até seu primeira novela animada ou vídeo viral publicado." },
                 { q: "Posso ter problemas com direitos autorais?", a: "Risco zero. Esta é a maior vantagem do nosso método. Ensinamos você a criar TUDO do zero com IA: imagens, vozes e roteiros originais." },
                 { q: "Em quanto tempo consigo os 100.000 inscritos?", a: "Embora os resultados variem, o método foi desenhado para acelerar sua jornada. Alunos consistentes podem alcançar essa meta entre 30 a 90 dias." },
                 { q: "Preciso de ferramentas ou softwares caros?", a: "Não. Ensinamos a usar ferramentas gratuitas ou de baixíssimo custo. Seu maior investimento será seu tempo." },
@@ -465,15 +466,13 @@
                 if (el) el.src = CONFIG_PAGINA[id];
             });
 
-            const carousel = document.getElementById('carousel-prints');
-            if (carousel) {
-                // Duplica o conjunto de prints para criar o efeito de loop infinito suave
-                const allPrints = [...CONFIG_PAGINA.prints, ...CONFIG_PAGINA.prints];
-                allPrints.forEach((link, index) => {
+            const gridPrints = document.getElementById('carousel-prints');
+            if (gridPrints) {
+                CONFIG_PAGINA.prints.forEach((link, index) => {
                     const div = document.createElement('div');
                     div.className = "print-card";
                     div.innerHTML = `<img src="${link}" alt="Resultado Aluno ${index + 1}" loading="lazy">`;
-                    carousel.appendChild(div);
+                    gridPrints.appendChild(div);
                 });
             }
 
@@ -542,7 +541,7 @@
                 document.getElementById('cta-node').className = "visible-node mt-10";
                 document.getElementById('main-content').className = "visible-node";
                 document.getElementById('sticky-cta').classList.add('active');
-            }, 5000); 
+            }, 2000); 
         }
 
         window.addEventListener('resize', () => {
