@@ -110,6 +110,60 @@
             border: 2px solid var(--red);
             background: rgba(255, 0, 0, 0.05);
         }
+        
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 */
+            height: 0;
+            overflow: hidden;
+        }
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        /* --- CARROSSEL AUTOMÁTICO INFINITO --- */
+        .carousel-wrapper {
+            width: 100%;
+            overflow: hidden;
+            position: relative;
+            padding: 40px 0;
+        }
+        
+        .carousel-track {
+            display: flex;
+            width: calc(240px * 40); /* Ajustado para o dobro para loop infinito suave */
+            animation: scroll 60s linear infinite;
+            gap: 1.5rem;
+        }
+        
+        .print-card {
+            width: 240px;
+            flex-shrink: 0;
+            border-radius: 1rem;
+            overflow: hidden;
+            border: 1px solid rgba(255,255,255,0.1);
+            background: #111;
+            transition: transform 0.3s;
+        }
+        
+        .print-card:hover {
+            transform: scale(1.05);
+            border-color: var(--neon);
+        }
+
+        @keyframes scroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(calc(-240px * 20 - 1.5rem * 20)); }
+        }
+
+        /* FAQ Styling */
+        details summary::-webkit-details-marker { display: none; }
+        details[open] summary span { transform: rotate(180deg); }
     </style>
 </head>
 <body>
@@ -140,26 +194,17 @@
 
             <!-- VSL BOX -->
             <div class="glass-panel rounded-3xl p-3 md:p-6 mb-10 relative overflow-hidden scanner">
-                <div class="aspect-video bg-black rounded-2xl flex items-center justify-center relative group cursor-pointer" id="vsl-trigger">
-                    <img id="img-vsl-thumb" src="" alt="Thumbnail VSL" class="absolute inset-0 w-full h-full object-cover opacity-50 group-hover:opacity-70 transition-opacity">
-                    <div class="absolute inset-0 bg-gradient-to-t from-red-500/20 to-transparent"></div>
-                    <div class="z-10 text-center">
-                        <div class="w-20 h-20 md:w-28 md:h-28 rounded-full bg-green-500/20 border border-green-500/40 flex items-center justify-center mx-auto group-hover:scale-110 transition-transform">
-                            <svg class="w-10 h-10 text-green-500" fill="currentColor" viewBox="0 0 20 20"><path d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z"/></svg>
-                        </div>
-                        <p class="mt-4 text-green-500 text-sm font-bold tracking-widest uppercase">Iniciar Transmissão de Dados</p>
-                    </div>
+                <div class="aspect-video bg-black rounded-2xl flex items-center justify-center relative overflow-hidden" id="vsl-placeholder">
+                    <img id="img-vsl-thumb" src="" alt="Capa da VSL" class="absolute inset-0 w-full h-full object-cover">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
                 </div>
-
-                <div id="vsl-player-container" class="video-player-wrapper mt-4">
-                    <!-- O player será inserido aqui após o delay ou clique -->
-                </div>
+                <div id="vsl-player-container" class="video-player-wrapper"></div>
             </div>
 
             <!-- BOTÃO COM DELAY -->
             <div id="cta-node" class="hidden-node">
                 <a href="https://pay.hotmart.com/Y101106544Q?checkoutMode=10" target="_blank" rel="noopener noreferrer" class="neon-btn w-full md:w-auto px-12 py-7 rounded-full text-xl md:text-2xl uppercase tracking-tighter">
-                    🟢 QUERO COMEÇAR MINHA FÁBRICA AGORA!
+                    QUERO COMEÇAR MINHA FÁBRICA AGORA!
                 </a>
                 <p class="mt-4 text-[10px] text-gray-500">🔒 Compra 100% Segura. Acesso Imediato.</p>
             </div>
@@ -192,6 +237,20 @@
                             <span class="red-text font-bold uppercase">A dor técnica:</span> Você acha que precisa gastar dez mil reais em um PC gamer potente e fazer anos de curso de edição de vídeo para conseguir criar um canal viral.
                         </p>
                     </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- LÂMINA: CARROSSEL AUTOMÁTICO -->
+        <section class="py-24 bg-zinc-900/40 border-y border-white/5 relative overflow-hidden">
+            <div class="max-w-7xl mx-auto px-6 mb-12 text-center">
+                <h2 class="text-3xl md:text-5xl font-black neon-text mb-4">RECONHECIMENTO MÁXIMO</h2>
+                <p class="text-gray-400 uppercase tracking-widest text-sm italic">O que os nossos alunos e seguidores estão a dizer</p>
+            </div>
+            
+            <div class="carousel-wrapper">
+                <div class="carousel-track" id="carousel-prints">
+                    <!-- Gerado via JS com Loop Infinito -->
                 </div>
             </div>
         </section>
@@ -236,59 +295,63 @@
                     <h2 class="text-3xl md:text-5xl mb-6 font-bold">AFINAL, QUEM É ANDERSON RÊGO?</h2>
                     <div class="space-y-6 text-gray-300 leading-relaxed text-lg">
                         <p>Produtor de conteúdo e especialista em automação digital. Anderson é a mente por trás de canais que faturam em dólar todos os meses de forma totalmente invisível.</p>
-                        <p>Após conquistar a cobiçada placa de prata do YouTube (100 mil inscritos) atuando apenas nos bastidores, ele decidiu abrir a caixa preta da sua operação. Ele percebeu que a era do influenciador tradicional está saturada e criou o Shorts Milionários 2.0.</p>
+                        <p>Após conquistar a cobiçada placa de prata do YouTube (100 mil inscritos) atuando apenas nos bastidores, ele decidiu abrir a caixa preta da sua operação.</p>
                         <p>Aqui, você não vai aprender a ser apenas um editor de vídeos comum. Você será treinado para se tornar o dono de uma verdadeira fábrica de conteúdo sintético.</p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- DOBRA 5: ESTRUTURA DO CURSO (NOVA) -->
+        <!-- LÂMINA: DEPOIMENTO EM VÍDEO -->
+        <section class="py-24 px-6 bg-black">
+            <div class="max-w-4xl mx-auto">
+                <div class="text-center mb-12">
+                    <h2 class="text-2xl md:text-4xl font-bold mb-4 uppercase">> VEJA O QUE UM ALUNO ALCANÇOU:</h2>
+                    <p class="text-gray-500">Resultados reais de quem aplicou o protocolo da fábrica anónima.</p>
+                </div>
+                <div class="glass-panel p-4 rounded-[2rem] border border-green-500/20">
+                    <div id="depoimento-video-container" class="video-container rounded-2xl overflow-hidden bg-zinc-900">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- DOBRA 5: ESTRUTURA DO CURSO -->
         <section class="py-24 px-6 bg-zinc-950/50">
             <div class="max-w-6xl mx-auto">
                 <h2 class="text-2xl md:text-4xl text-center mb-16 font-bold">> DENTRO DO CURSO SHORTS MILIONÁRIOS, VOCÊ TERÁ ACESSO AO MAPA COMPLETO:</h2>
                 <div class="grid md:grid-cols-3 gap-8">
                     <div class="glass-panel p-8 rounded-3xl border border-red-500/20">
                         <h3 class="text-xl font-bold red-text mb-4">MÓDULO 0: O SETUP DO IMPÉRIO</h3>
-                        <p class="text-sm text-gray-300 leading-relaxed">A base de tudo. Como configurar seu canal do zero para o sucesso e criar a identidade visual magnética do seu herói desde o primeiro clique.</p>
+                        <p class="text-sm text-gray-300 leading-relaxed">A base de tudo. Como configurar seu canal do zero para o sucesso e criar a identidade visual magnética do seu herói.</p>
                     </div>
                     <div class="glass-panel p-8 rounded-3xl border border-red-500/20">
                         <h3 class="text-xl font-bold red-text mb-4">MÓDULO 1: A ESTRATÉGIA INVENCÍVEL</h3>
-                        <p class="text-sm text-gray-300 leading-relaxed">O atalho emocional. Aprenda a fórmula exata das histórias que retêm a atenção e descubra a vantagem injusta para dominar o algoritmo.</p>
+                        <p class="text-sm text-gray-300 leading-relaxed">O atalho emocional. Aprenda a fórmula exata das histórias que retêm a atenção no Shorts.</p>
                     </div>
                     <div class="glass-panel p-8 rounded-3xl border border-red-500/20">
                         <h3 class="text-xl font-bold red-text mb-4">MÓDULO 2: A FÁBRICA NA PRÁTICA</h3>
-                        <p class="text-sm text-gray-300 leading-relaxed">Onde a mágica acontece. Geração de roteiros virais, prompts otimizados, clonagem de voz e a montagem letal passo a passo usando o CapCut.</p>
+                        <p class="text-sm text-gray-300 leading-relaxed">Onde a mágica acontece. Geração de roteiros virais, prompts otimizados e narração.</p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- DOBRA 6: BÔNUS (NOVA) -->
+        <!-- DOBRA 6: BÔNUS -->
         <section class="py-24 px-6">
             <div class="max-w-6xl mx-auto">
                 <h2 class="text-2xl md:text-4xl text-center mb-16 font-bold">> E PARA OS PRIMEIROS 100 QUE GARANTIREM A VAGA HOJE... SEPAREI 2 BÔNUS VIP INÉDITOS:</h2>
-                
                 <div class="grid md:grid-cols-2 gap-8">
-                    <!-- BÔNUS 1 -->
                     <div class="bonus-box p-8 rounded-[2rem] relative overflow-hidden">
                         <div class="absolute top-0 right-0 bg-red-600 px-4 py-1 text-[10px] font-bold">100% GRÁTIS</div>
                         <h3 class="text-xl font-bold mb-4 uppercase">🎁 BÔNUS VIP 1: A MÁQUINA DE PODCASTS COM I.A.</h3>
-                        <p class="text-sm text-gray-300 mb-6 leading-relaxed">
-                            O atalho definitivo para bater as 4.000 horas do YouTube rápido. Em 4 aulas diretas, eu te ensino o método do estúdio vazio para criar podcasts fictícios longos. Com sincronia labial no app Flow, você fará debates épicos 100% gerados por robôs.
-                        </p>
-                        <p class="text-gray-500 text-xs line-through">Se vendido separado: de R$ 197,00</p>
+                        <p class="text-sm text-gray-300 mb-6 leading-relaxed">O atalho definitivo para bater as 4.000 horas do YouTube rápido.</p>
                         <p class="text-green-500 font-bold">HOJE: TOTALMENTE GRÁTIS</p>
                     </div>
-
-                    <!-- BÔNUS 2 -->
                     <div class="bonus-box p-8 rounded-[2rem] relative overflow-hidden">
                         <div class="absolute top-0 right-0 bg-red-600 px-4 py-1 text-[10px] font-bold">100% GRÁTIS</div>
                         <h3 class="text-xl font-bold mb-4 uppercase">📸 BÔNUS VIP 2: MÉTODO DE BASTIDORES VIRAIS</h3>
-                        <p class="text-sm text-gray-300 mb-6 leading-relaxed">
-                            O nicho de fãs e terror é explosivo e engajado. Eu vou te entregar os prompts técnicos exatos para usar o Gemini Pro e gerar cenários hiper-realistas. Você vai aprender a técnica do loop infinito e de transições no CapCut que hipnotiza a audiência.
-                        </p>
-                        <p class="text-gray-500 text-xs line-through">Se vendido separado: de R$ 147,00</p>
+                        <p class="text-sm text-gray-300 mb-6 leading-relaxed">O nicho de fãs e terror é explosivo. Entregamos os prompts técnicos exatos.</p>
                         <p class="text-green-500 font-bold">HOJE: TOTALMENTE GRÁTIS</p>
                     </div>
                 </div>
@@ -299,46 +362,36 @@
         <section class="py-24 px-6 text-center">
             <div class="max-w-5xl mx-auto flex flex-col md:flex-row glass-panel rounded-[3rem] overflow-hidden border-2 border-red-600/20">
                 <div class="w-full md:w-1/2 p-12 bg-red-900/5 flex flex-col justify-center text-left">
-                    <h2 class="text-2xl font-bold mb-6 font-heading">> ESSA É A ÚNICA OPORTUNIDADE QUE PODE MUDAR A SUA REALIDADE FINANCEIRA AINDA ESTE ANO.</h2>
-                    <p class="text-gray-400">Ao clicar no botão, você recebe acesso imediato a todo o ecossistema Shorts Milionários e aos bônus secretos de Anderson Rêgo.</p>
+                    <h2 class="text-2xl font-bold mb-6 font-heading">> ESSA É A ÚNICA OPORTUNIDADE QUE PODE MUDAR A SUA REALIDADE FINANCEIRA.</h2>
+                    <p class="text-gray-400">Acesso imediato ao ecossistema Shorts Milionários e aos bônus secretos.</p>
                 </div>
                 <div class="w-full md:w-1/2 p-12 bg-black flex flex-col justify-center items-center">
-                    <p class="text-gray-500 line-through mb-2 text-xl">VALOR REAL DO ARSENAL COMPLETO: R$ 391,00</p>
+                    <p class="text-gray-500 line-through mb-2 text-xl">VALOR REAL: R$ 391,00</p>
                     <h3 class="text-7xl md:text-8xl font-black neon-text mb-4">R$ 47</h3>
                     <p class="text-gray-500 text-xs mb-8 uppercase tracking-widest">(Ou parcele em até 5x no cartão)</p>
                     <a href="https://pay.hotmart.com/Y101106544Q?checkoutMode=10" target="_blank" rel="noopener noreferrer" class="neon-btn w-full py-8 rounded-3xl text-xl md:text-xl uppercase shadow-2xl">
-                        SIM! QUERO GARANTIR MEU CURSO E OS BÔNUS
+                        SIM! QUERO GARANTIR MEU CURSO
                     </a>
                 </div>
             </div>
         </section>
 
-        <!-- DOBRA 8: GARANTIA E FAQ -->
+        <!-- DOBRA 8: FAQ & QUEBRA DE OBJEÇÕES -->
         <section class="py-24 px-6 bg-zinc-950">
             <div class="max-w-4xl mx-auto">
                 <div class="text-center mb-16">
                     <img id="img-garantia" src="" alt="7 Dias de Garantia" class="w-32 mx-auto mb-8 grayscale hover:grayscale-0 transition-all">
-                    <h2 class="text-3xl font-bold mb-4">GARANTIA BLINDADA DE 7 DIAS</h2>
-                    <p class="text-gray-400 text-lg leading-relaxed max-w-2xl mx-auto">
-                        O risco é todo meu. Acesse o material por 7 dias, aplique as técnicas e suba seus vídeos. Se você não ficar impressionado com a nossa linha de montagem, basta apertar um botão na Hotmart e eu devolvo 100% do seu dinheiro. Sem formulários complexos e sem letrinhas miúdas.
-                    </p>
+                    <h2 class="text-3xl font-bold mb-4 uppercase tracking-tighter">Perguntas Frequentes & Objeções</h2>
+                    <p class="text-gray-400 text-lg leading-relaxed max-w-2xl mx-auto">Tire todas as suas dúvidas antes de entrar para a elite da Fábrica Anônima.</p>
                 </div>
-
-                <div class="space-y-4">
-                    <details class="glass-panel p-6 rounded-2xl cursor-pointer group">
-                        <summary class="font-bold list-none flex justify-between items-center uppercase text-sm">PRECISO APARECER OU COMPRAR UMA CÂMERA CARA? <span class="text-green-500 group-open:rotate-180 transition-transform">▼</span></summary>
-                        <p class="mt-4 text-sm text-gray-400 leading-relaxed">Não. A inteligência artificial vai gerar os roteiros, a narração profissional e as imagens. Você pode operar a sua fábrica de conteúdo inteiramente pelos bastidores, usando apenas o seu celular ou um computador simples.</p>
-                    </details>
-                    
-                    <details class="glass-panel p-6 rounded-2xl cursor-pointer group">
-                        <summary class="font-bold list-none flex justify-between items-center uppercase text-sm">O YOUTUBE VAI DESMONETIZAR MEU CANAL POR USAR I.A.? <span class="text-green-500 group-open:rotate-180 transition-transform">▼</span></summary>
-                        <p class="mt-4 text-sm text-gray-400 leading-relaxed">O YouTube pune apenas os canais preguiçosos que usam vozes robóticas ruins e slides estáticos. O nosso método foca em automação segura, ensinando você a criar uma edição dinâmica e imagens únicas que o algoritmo do YouTube adora e monetiza.</p>
-                    </details>
+                
+                <div class="space-y-4" id="faq-container">
+                    <!-- FAQ Dinâmico -->
                 </div>
             </div>
         </section>
 
-        <!-- RODAPÉ COM POLÍTICAS E TERMOS -->
+        <!-- RODAPÉ -->
         <footer class="py-16 px-6 text-center text-[10px] text-gray-700 uppercase tracking-widest border-t border-white/5 bg-black">
             <div class="max-w-4xl mx-auto">
                 <p class="mb-6">© 2026 Anderson Rêgo - Terreno Digital</p>
@@ -347,7 +400,6 @@
                     <span class="hidden md:inline text-gray-800">|</span>
                     <a href="https://termosecondocoesmilionarios.netlify.app/" target="_blank" rel="noopener noreferrer" class="hover:text-green-500 transition-colors">Termos e Condições</a>
                 </div>
-                <p class="mt-8 opacity-40 lowercase normal-case">Este site não faz parte do Google ou do Facebook. Além disso, este site NÃO é endossado pelo Google ou Facebook de nenhuma maneira.</p>
             </div>
         </footer>
     </div>
@@ -360,73 +412,148 @@
     </div>
 
     <script>
-        const IMAGENS_PAGINA = {
+        // ==========================================
+        // CONFIGURAÇÕES DE LINKS E CONTEÚDO
+        // ==========================================
+        const CONFIG_PAGINA = {
+            vslVideoUrl: "COLOCAR_LINK_DA_VSL_AQUI", 
+            depoimentoVideoUrl: "COLOCAR_LINK_DO_DEPOIMENTO_AQUI",
+
             vslThumb: "https://i.postimg.cc/cCVY4c2n/Thumbnail-VSL.jpg",
             anime: "https://i.postimg.cc/cH4KBzfd/Goku-Forte.png",
             herois: "https://i.postimg.cc/Njjm45tn/Eu-Idol.png",
             terror: "https://i.postimg.cc/k41C31z7/Terror.png",
             podcast: "https://i.postimg.cc/7YyNgHfG/Goku-podcast.jpg",
             anderson: "https://i.postimg.cc/1RFgcDqt/Eu-com-placo-100k.png",
-            garantia: "https://i.postimg.cc/FzG1dVYd/Garantia-7-dias.webp"
+            garantia: "https://i.postimg.cc/FzG1dVYd/Garantia-7-dias.webp",
+
+            prints: [
+                "https://i.postimg.cc/wjL6Pdzt/1.png", "https://i.postimg.cc/4yRCpYK2/2.png", "https://i.postimg.cc/brg6dr1t/1-(3).png", "https://i.postimg.cc/kXj1mVJr/1-(4).png", "https://i.postimg.cc/j5Qck2gp/1-(5).png",
+                "https://i.postimg.cc/Y0d3MVwL/1-(6).png", "https://i.postimg.cc/J4dqF9qY/1-(7).png", "https://i.postimg.cc/FRmgcmr7/1-(8).png", "https://i.postimg.cc/90gGv7GR/9.png", "https://i.postimg.cc/7Yc39SHt/10.png",
+                "https://i.postimg.cc/L55PB8rS/1-(11).png", "https://i.postimg.cc/X7T5d3xY/1-(12).png", "https://i.postimg.cc/d09ZbCF8/1-(13).png", "https://i.postimg.cc/Jn6DnWGs/1-(14).png", "https://i.postimg.cc/Xqtrfcfh/1-(15).png",
+                "https://i.postimg.cc/nhbsM2c9/1-(16).png", "https://i.postimg.cc/SKmJfK9j/1-(17).png", "https://i.postimg.cc/W33zxfSm/1-(18).png", "https://i.postimg.cc/4dSyGbSV/1-(19).png", "https://i.postimg.cc/BtWvLZs9/1-(20).png"
+            ],
+
+            faq: [
+                {
+                    q: "Preciso de algum conhecimento prévio?",
+                    a: "Absolutamente não. O curso foca 100% na criação do conteúdo do zero. Nós vamos guiá-lo passo a passo, clique a clique, até sua primeira 'novela animada' ou vídeo viral publicado. Não é um curso teórico, é prático para produzir o que viraliza."
+                },
+                {
+                    q: "Posso ter problemas com direitos autorais?",
+                    a: "Risco zero. Esta é a maior vantagem do nosso método. Diferente de canais de cortes, ensinamos você a criar TUDO do zero: as imagens são geradas por IA, as vozes são exclusivas, os roteiros são originais e as trilhas são livres de direitos. Você será dono de 100% do seu conteúdo."
+                },
+                {
+                    q: "Em quanto tempo consigo os 100.000 inscritos?",
+                    a: "Embora os resultados variem para cada pessoa, o método foi desenhado para acelerar sua jornada. Temos uma estimativa média de que alunos dedicados que aplicam o método com consistência podem alcançar a meta dos 100 mil inscritos entre 30 a 90 dias."
+                },
+                {
+                    q: "Preciso de ferramentas ou softwares caros?",
+                    a: "Não. O método foi desenhado para ser o mais acessível possível. Ensinamos a usar ferramentas gratuitas ou de baixíssimo custo. Seu maior investimento será seu tempo e dedicação em aplicar o processo."
+                },
+                {
+                    q: "E se eu não gostar do curso?",
+                    a: "Seu risco é zero. Você tem uma garantia incondicional de 7 dias. Se por qualquer motivo achar que o curso não é para você, basta pedir o reembolso na Hotmart e devolveremos 100% do seu dinheiro, sem perguntas."
+                },
+                {
+                    q: "Preciso saber editar vídeos profissionalmente para fazer as cenas?",
+                    a: "Não. O método usa a inteligência artificial do GEMINI para fazer o trabalho pesado. Você terá acesso aos meus PROMPTS PESSOAIS de 'bastidores': é só copiar, colar e a IA gera a imagem e o vídeo de transição para você."
+                },
+                {
+                    q: "Funciona com qualquer grupo de K-pop ou Ator de Dorama?",
+                    a: "Sim. A técnica de 'Bastidores Realistas' é totalmente editável. Você aprende a inserir QUALQUER IDOL (do BTS ao Blackpink) ou ator na cena, mantendo a iluminação e o realismo como se fosse uma foto oficial de set."
+                },
+                {
+                    q: "Preciso de um computador super potente (PC Gamer)?",
+                    a: "Não. Todo o processamento dos vídeos (usando o modelo VIO3) e das imagens é feito na nuvem pelos servidores do Google. Você pode criar as artes e os vídeos usando qualquer computador básico ou até mesmo um CELULAR com internet."
+                },
+                {
+                    q: "Como eu ganho dinheiro com esse módulo?",
+                    a: "Existem duas formas principais: vendendo 'SESSÕES DE FOTOS' digitais para fãs que querem se ver ao lado dos ídolos, ou criando conteúdo viral para crescer canais de fã-clube e monetizar com visualizações (AdSense)."
+                }
+            ]
         };
 
-        function carregarImagens() {
-            Object.keys(IMAGENS_PAGINA).forEach(key => {
-                const elementId = `img-${key.replace(/[A-Z]/g, letter => `-${letter.toLowerCase()}`)}`;
+        function carregarElementos() {
+            // Imagens
+            const ids = ['vslThumb', 'anime', 'herois', 'terror', 'podcast', 'anderson', 'garantia'];
+            ids.forEach(id => {
+                const elementId = `img-${id.replace(/[A-Z]/g, letter => `-${letter.toLowerCase()}`)}`;
                 const el = document.getElementById(elementId);
-                if (el) el.src = IMAGENS_PAGINA[key];
+                if (el) el.src = CONFIG_PAGINA[id];
             });
+
+            // Carrossel Automático Infinito (Duplicando itens para loop perfeito)
+            const carousel = document.getElementById('carousel-prints');
+            if (carousel) {
+                const allPrints = [...CONFIG_PAGINA.prints, ...CONFIG_PAGINA.prints];
+                allPrints.forEach((link, index) => {
+                    const div = document.createElement('div');
+                    div.className = "print-card";
+                    div.innerHTML = `<img src="${link}" alt="Depoimento ${index + 1}" loading="lazy">`;
+                    carousel.appendChild(div);
+                });
+            }
+
+            // FAQ
+            const faqContainer = document.getElementById('faq-container');
+            if (faqContainer) {
+                CONFIG_PAGINA.faq.forEach(item => {
+                    const details = document.createElement('details');
+                    details.className = "glass-panel p-6 rounded-2xl cursor-pointer group transition-all duration-300 hover:border-green-500/40";
+                    details.innerHTML = `
+                        <summary class="font-bold list-none flex justify-between items-center uppercase text-sm tracking-tighter">
+                            ${item.q} 
+                            <span class="text-green-500 transition-transform duration-300">▼</span>
+                        </summary>
+                        <p class="mt-4 text-sm text-gray-400 leading-relaxed border-t border-white/5 pt-4">
+                            ${item.a}
+                        </p>
+                    `;
+                    faqContainer.appendChild(details);
+                });
+            }
         }
 
-        // --- THREE.JS: DIGITAL GRID BACKGROUND ---
+        // --- BACKGROUND ANIMADO ---
         const scene = new THREE.Scene();
         const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
         const renderer = new THREE.WebGLRenderer({ canvas: document.getElementById('bg-canvas'), alpha: true });
         renderer.setSize(window.innerWidth, window.innerHeight);
-
         const gridGeo = new THREE.PlaneGeometry(100, 100, 50, 50);
         const gridMat = new THREE.MeshBasicMaterial({ color: 0x003300, wireframe: true, transparent: true, opacity: 0.15 });
         const grid = new THREE.Mesh(gridGeo, gridMat);
         grid.rotation.x = -Math.PI / 2;
         scene.add(grid);
-
-        camera.position.z = 10;
-        camera.position.y = 5;
-
+        camera.position.z = 10; camera.position.y = 5;
         function animateBg() {
             requestAnimationFrame(animateBg);
-            grid.position.z += 0.03;
-            if (grid.position.z > 2) grid.position.z = 0;
+            grid.position.z += 0.03; if (grid.position.z > 2) grid.position.z = 0;
             renderer.render(scene, camera);
         }
         animateBg();
 
-        // --- LÓGICA DE NOTIFICAÇÕES ---
-        const names = ["Ricardo M.", "Patrícia S.", "Duarte F.", "Fernanda L.", "Tiago R.", "Sérgio A."];
-        const notif = document.getElementById('system-notif');
-        function showSystemNotif() {
-            const name = names[Math.floor(Math.random() * names.length)];
-            document.getElementById('notif-text').innerText = `${name} entrou na Fábrica`;
-            notif.style.transform = "translateX(0)";
-            setTimeout(() => notif.style.transform = "translateX(150%)", 4000);
-        }
-        setInterval(showSystemNotif, 12000);
-
-        // --- GATILHO DE REVELAÇÃO (DELAY CONFIGURADO) ---
+        // --- GATILHO ---
         window.onload = () => {
-            carregarImagens();
+            carregarElementos();
             setTimeout(() => {
-                const ctaNode = document.getElementById('cta-node');
-                const mainContent = document.getElementById('main-content');
-                const stickyCta = document.getElementById('sticky-cta');
-                const videoPlayer = document.getElementById('vsl-player-container');
+                const vslPlaceholder = document.getElementById('vsl-placeholder');
+                const videoPlayerContainer = document.getElementById('vsl-player-container');
+                const depoVideoContainer = document.getElementById('depoimento-video-container');
                 
-                if(ctaNode) ctaNode.className = "visible-node mt-10";
-                if(mainContent) mainContent.className = "visible-node";
-                if(stickyCta) stickyCta.classList.add('active');
-                if(videoPlayer) {
-                    videoPlayer.classList.add('active');
+                if (CONFIG_PAGINA.vslVideoUrl !== "COLOCAR_LINK_DA_VSL_AQUI" && vslPlaceholder) {
+                    vslPlaceholder.style.display = 'none';
+                    videoPlayerContainer.classList.add('active');
+                    videoPlayerContainer.innerHTML = `<div class="video-container"><iframe src="${CONFIG_PAGINA.vslVideoUrl}" allow="autoplay; fullscreen" allowfullscreen></iframe></div>`;
                 }
+
+                if (CONFIG_PAGINA.depoimentoVideoUrl !== "COLOCAR_LINK_DO_DEPOIMENTO_AQUI" && depoVideoContainer) {
+                    depoVideoContainer.innerHTML = `<iframe src="${CONFIG_PAGINA.depoimentoVideoUrl}" allow="fullscreen" allowfullscreen></iframe>`;
+                }
+
+                document.getElementById('cta-node').className = "visible-node mt-10";
+                document.getElementById('main-content').className = "visible-node";
+                document.getElementById('sticky-cta').classList.add('active');
             }, 5000); 
         }
 
